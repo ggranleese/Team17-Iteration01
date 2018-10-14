@@ -4,14 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class PileSizeTest {
+public class GameStartTest {
 
 	@Test
 	public void test() {
-		Pile pile = new Pile();
-		pile.make();
-		
-		assertTrue(pile.size == 104);
+		fail("Not yet implemented");
 	}
 
 }

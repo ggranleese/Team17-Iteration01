@@ -2,6 +2,8 @@ package core;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class PlayerDealTest {
@@ -11,8 +13,8 @@ public class PlayerDealTest {
 		Pile pile = new Pile();
 		PlayerHand hand = new PlayerHand();
 		hand.drawHand(pile);
-		
-		assertTrue(hand.getHand().length = 14); 
+
+		assertTrue(hand.getHand().size() == 14); 
 	}
 
 }

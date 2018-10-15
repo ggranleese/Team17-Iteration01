@@ -59,10 +59,20 @@ public class Rummikub {
 	}
 	
 	public static int promptNumBotChoice() {
+		System.out.println("Chose number of bots: ");
 		Scanner numBots = new Scanner(System.in);
 		int n = numBots.nextInt();
 		numBots.close();
 		return n;
+	}
+	
+	public static int promptRunOrSetChoice() {
+		System.out.println("Chose run or set: ");
+		Scanner runOrSet = new Scanner(System.in);
+		int n = runOrSet.nextInt();
+		runOrSet.close();
+		return n;
+
 	}
 	
 }

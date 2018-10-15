@@ -14,9 +14,9 @@ public class RunOntoTableTest extends TestCase{
 	@Test
 	public void test() {
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
-		tiles.add(new Tile(3,"G"));
-		tiles.add(new Tile(4,"G"));
-		tiles.add(new Tile(5,"G"));
+		tiles.add(new Tile(1,3));
+		tiles.add(new Tile(1,4));
+		tiles.add(new Tile(1,5));
 		
 		Run run = new Run(tiles);	
 		

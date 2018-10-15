@@ -10,10 +10,10 @@ public class PlayerHandRemoveCardTest extends TestCase{
 		ArrayList<Tile> playerHand = new ArrayList<Tile>();
 		
 		playerHand.addTile(1,1);
-		playerHand.addTile(1,2);
+		playerHand.addTile(1,3);
 		playerHand.removeTile(1,1);
 		
-		assertTrue(playerHand.get(0).getValue() == 2);
+		assertTrue(playerHand.get(0).getValue() == 3);
 	}
 	
 	

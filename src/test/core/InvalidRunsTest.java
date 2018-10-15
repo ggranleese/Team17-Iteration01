@@ -12,7 +12,7 @@ public class InvalidRunsTest extends TestCase{
 
 	@Test
 	public void test() {
-		ArrayList<Tile> tiles1 = new ArrayList<Tile>();
+		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		tiles.add(new Tile(1,3));
 		tiles.add(new Tile(1,4));
 		tiles.add(new Tile(1,5));

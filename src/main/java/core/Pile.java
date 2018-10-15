@@ -29,6 +29,10 @@ private ArrayList<Tile> pile;
 		
 		this.pile = tmp;
 	}
+	
+	public void removeTile() {
+		this.pile.remove(0);
+	}
 
 	//GETTERS
 	public Tile getTile(int index) {

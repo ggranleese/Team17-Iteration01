@@ -9,9 +9,9 @@ public class PileDealTileTest extends TestCase {
 		
 		pile.populate();
 		
-		Int sizeHold = pile.getSize();
+		int sizeHold = pile.getPile().size();
 		pile.removeTile();
 		
-		assertTrue(pile.getPile.size() != sizeHold);
+		assertTrue(pile.getPile().size() != sizeHold);
 	}
 }

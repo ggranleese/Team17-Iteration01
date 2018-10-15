@@ -58,4 +58,11 @@ public class Rummikub {
 		    }
 	}
 	
+	public static int promptNumBotChoice() {
+		Scanner numBots = new Scanner(System.in);
+		int n = numBots.nextInt();
+		numBots.close();
+		return n;
+	}
+	
 }

@@ -1,5 +1,8 @@
 package core;
 
+import java.util.*;
+
+
 public class Rummikub {
 
 	public static void main(String[] args) {
@@ -13,20 +16,21 @@ public class Rummikub {
 		//--Int n = Number of players
 		
 		//Draw initial tiles
-		//--This is just done as tile array consisting of n tiles.
-		//--The position of the tile in the array relates to the player
-		//--i.e. Given: Tile WhoGoesFirst[] = new Tile[n];
+		//--This is just done as array consisting of n unique integers.
+		//--The position of the int in the array relates to the player
+		//--i.e. Given: Int WhoGoesFirst[] = new Int[n];
 		//--WhoGoesFirst[0] is player 1, WhoGoesFirst[1] is player 2 ...
 		
-		//Check for ties
+		int PossibleDraws[];
+		for(int i = 0; i < n; i++) {
+			PossibleDraws.add(i);
+		}
+		StartDraw();
 		
 		//Players dealt 14 tiles each
 		//Player with highest tile goes first
 		
 	}
 	
-	public static Tile[] ResloveTies(Tile[] x){
-		return x;
-	}
 	
 }

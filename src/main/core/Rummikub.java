@@ -20,7 +20,7 @@ public class Rummikub {
 		//--Returns an array where players are represented by the element index
 		//--i.e. Player1 is Array[0], Player2 is Array[1]...
 		//--And the int value at that index is the order they play in
-		int turnOrder[] = PlayerOrder(n);
+		//int turnOrder[] = PlayerOrder(n);
 		
 		//Players dealt 14 tiles each
 		//Player with highest tile goes first

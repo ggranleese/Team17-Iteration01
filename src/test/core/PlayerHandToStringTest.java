@@ -13,7 +13,7 @@ public class PlayerHandToStringTest extends TestCase{
 		playerHand.addTile(new Tile(1,1));
 		playerHand.addTile(new Tile(1,2));
 		playerHand.addTile(new Tile(1,3));
-		
-		assertEquals(playerHand.toString(), "B1, B2, B3");
+	
+		assertEquals(playerHand.toString(), "B1B2B3");
 	}
 }

@@ -32,7 +32,7 @@ public class Rummikub {
 		for(int i = 0; i > n; i++) {
 			PossibleDraws[i] = i+1;
 		}
-		StartDraw(PossibleDraws);
+		startDraw(PossibleDraws);
 		return (PossibleDraws);
 	}
 	

@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-public class PlayerDealTest {
+import junit.framework.TestCase;
+
+public class PlayerDealTest extends TestCase{
 
 	@Test
 	public void test() {

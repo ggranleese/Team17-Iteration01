@@ -9,9 +9,13 @@ public class PlayerStartDrawTest {
 	@Test
 	public void test() {
 		int PossibleDraws[] = {1,2,3,4};
-		Tile result[] = Rummikub.StartDraw(PossibleDraws);
+		int result[] = Rummikub.StartDraw(PossibleDraws);
 		
-		assertTrue(result[0].getNumber() != result[1].getNumber()); 
+		assertTrue(PossibleDraws[0] != result[0] &&
+				PossibleDraws[1] != result[1] &&
+				PossibleDraws[2] != result[2] &&
+				PossibleDraws[3] != result[3] 
+				); 
 		
 		 
 	}

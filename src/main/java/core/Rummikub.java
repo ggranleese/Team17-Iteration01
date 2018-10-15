@@ -21,11 +21,8 @@ public class Rummikub {
 		//--i.e. Given: Int WhoGoesFirst[] = new Int[n];
 		//--WhoGoesFirst[0] is player 1, WhoGoesFirst[1] is player 2 ...
 		
-		int PossibleDraws[];
-		for(int i = 0; i < n; i++) {
-			PossibleDraws.add(i);
-		}
-		StartDraw();
+		int PossibleDraws[] = {1,2,3,4};
+		StartDraw(PossibleDraws);
 		
 		//Players dealt 14 tiles each
 		//Player with highest tile goes first

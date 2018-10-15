@@ -20,23 +20,23 @@ public class Rummikub {
 		//--Returns an array where players are represented by the element index
 		//--i.e. Player1 is Array[0], Player2 is Array[1]...
 		//--And the int value at that index is the order they play in
-		int turnOrder[] = PlayerOrder(n);
+		//int turnOrder[] = PlayerOrder(n);
 		
 		//Players dealt 14 tiles each
 		//Player with highest tile goes first
 		
 	}
 
-	private static int[] PlayerOrder(int n) {
+	private static int[] playerOrder(int n) {
 		int PossibleDraws[] = new int[n];
 		for(int i = 0; i > n; i++) {
 			PossibleDraws[i] = i+1;
 		}
-		StartDraw(PossibleDraws);
+		startDraw(PossibleDraws);
 		return (PossibleDraws);
 	}
 	
-	private static Player[] PlayInOrder(int[] numArray) {
+	private static Player[] playInOrder(int[] numArray) {
 		int n = numArray.length;
 		Player[] playerArray = new Player[n];
 		for(int i=0; i<n;i++) {
@@ -46,7 +46,7 @@ public class Rummikub {
 		return playerArray;
 	}
 
-	static void StartDraw(int[] turnOrder) {
+	static void startDraw(int[] turnOrder) {
 		Random rnd = ThreadLocalRandom.current();
 		    for (int i = turnOrder.length - 1; i > 0; i--)
 		    {
@@ -56,6 +56,23 @@ public class Rummikub {
 		      turnOrder[index] = turnOrder[i];
 		      turnOrder[i] = a;
 		    }
+	}
+	
+	public static int promptNumBotChoice() {
+		System.out.println("Chose number of bots: ");
+		Scanner numBots = new Scanner(System.in);
+		int n = numBots.nextInt();
+		numBots.close();
+		return n;
+	}
+	
+	public static int promptRunOrSetChoice() {
+		System.out.println("Chose run or set: ");
+		Scanner runOrSet = new Scanner(System.in);
+		int n = runOrSet.nextInt();
+		runOrSet.close();
+		return n;
+
 	}
 	
 }

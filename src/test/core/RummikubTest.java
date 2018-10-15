@@ -9,5 +9,10 @@ public class RummikubTest extends TestCase {
 		assertTrue(n >= 0);
 	}
 	
+	public void testRunOrSet() {
+		int n = Rummikub.promptRunOrSetChoice();
+		assertTrue (n==1 || n== 0);	
+	}
+	
 	
 }

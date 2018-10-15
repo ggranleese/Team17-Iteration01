@@ -7,7 +7,8 @@ import java.util.Random;
 
 
 public class Pile {
-	
+
+	//MEMBERS
 private ArrayList<Tile> pile;
 	
 	//CONSTRUCTOR

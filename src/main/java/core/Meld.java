@@ -1,5 +1,8 @@
 package core;
 
-public class Meld {
- 
+import java.util.ArrayList;
+
+public interface Meld {
+	public ArrayList<Tile> getTiles();
+	public int getTypeOfMeld();
 }

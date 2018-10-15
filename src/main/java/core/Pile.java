@@ -10,14 +10,12 @@ public class Pile {
 	
 private ArrayList<Tile> pile;
 	
+	//CONSTRUCTOR
 	public Pile(){
 		this.pile = new ArrayList<Tile>();
 	}
 	
-	public Tile getTile(int index) {
-		return this.pile.get(index);
-	}
-	
+	//METHODS
 	public void shuffle() {
 		ArrayList<Tile> tmp = new ArrayList<Tile>();
 		Random rand = new Random();
@@ -30,6 +28,15 @@ private ArrayList<Tile> pile;
 		}
 		
 		this.pile = tmp;
+	}
+
+	//GETTERS
+	public Tile getTile(int index) {
+		return this.pile.get(index);
+	}
+	
+	public ArrayList<Tile> getPile() {
+		return this.pile;
 	}
 
 }

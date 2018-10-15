@@ -7,6 +7,7 @@ public class Run implements Meld{
 	//MEMBERS
 private	ArrayList<Tile> tiles;
 private int typeOfMeld;
+private Boolean valid;
 
 	//CONSTRUCTORS
 	public Run(ArrayList<Tile> tiles) {

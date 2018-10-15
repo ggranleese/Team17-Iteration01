@@ -7,20 +7,18 @@ public class Run implements Meld{
 	//MEMBERS
 private	ArrayList<Tile> tiles;
 private int typeOfMeld;
+private Boolean valid;
 
 	//CONSTRUCTORS
 	public Run(ArrayList<Tile> tiles) {
-		this.setTiles(tiles);
+		this.tiles = tiles;
 	}
 
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}
 
-	public void setTiles(ArrayList<Tile> tiles) {
-		this.tiles = tiles;
-	}
-
+	//GETTERS
 	public int getTypeOfMeld() {
 		return this.typeOfMeld = 1;
 	}

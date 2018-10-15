@@ -27,7 +27,7 @@ public class Rummikub {
 		
 	}
 
-	private static int[] PlayerOrder(int n) {
+	private static int[] playerOrder(int n) {
 		int PossibleDraws[] = new int[n];
 		for(int i = 0; i > n; i++) {
 			PossibleDraws[i] = i+1;
@@ -36,7 +36,7 @@ public class Rummikub {
 		return (PossibleDraws);
 	}
 	
-	private static Player[] PlayInOrder(int[] numArray) {
+	private static Player[] playInOrder(int[] numArray) {
 		int n = numArray.length;
 		Player[] playerArray = new Player[n];
 		for(int i=0; i<n;i++) {
@@ -46,7 +46,7 @@ public class Rummikub {
 		return playerArray;
 	}
 
-	static void StartDraw(int[] turnOrder) {
+	static void startDraw(int[] turnOrder) {
 		Random rnd = ThreadLocalRandom.current();
 		    for (int i = turnOrder.length - 1; i > 0; i--)
 		    {

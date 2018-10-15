@@ -35,6 +35,16 @@ public class Rummikub {
 		StartDraw(PossibleDraws);
 		return (PossibleDraws);
 	}
+	
+	private static Player[] PlayInOrder(int[] numArray) {
+		int n = numArray.length;
+		Player[] playerArray = new Player[n];
+		for(int i=0; i<n;i++) {
+			playerArray[numArray[i]] = new Player(); 
+		}
+		
+		return playerArray;
+	}
 
 	static void StartDraw(int[] turnOrder) {
 		Random rnd = ThreadLocalRandom.current();

@@ -35,9 +35,22 @@ private ArrayList<Tile> pile;
 		this.pile.remove(0);
 	}
 	
+	public void addTile(Tile t) {
+		this.pile.add(0,t);
+	}
+	
 	public void populate() {
 		
+		for(int x=0; x<2; x++){
+			for(int i=1; i<4; i++) {
+				for(int j=1; j<=13; j++) {
+					this.pile.add(new Tile(i,j));
+				}
+			}
+		}
+		
 	}
+	
 
 	//GETTERS
 	public Tile getTile(int index) {

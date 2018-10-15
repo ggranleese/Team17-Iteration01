@@ -9,12 +9,14 @@ public class PlayerStartDrawTest {
 	@Test
 	public void test() {
 		int PossibleDraws[] = {1,2,3,4};
-		int result[] = Rummikub.StartDraw(PossibleDraws);
+		int PossibleDraws2[] = {1,2,3,4};
+		Rummikub.StartDraw(PossibleDraws2);
 		
-		assertTrue(PossibleDraws[0] != result[0] &&
-				PossibleDraws[1] != result[1] &&
-				PossibleDraws[2] != result[2] &&
-				PossibleDraws[3] != result[3] 
+		
+		assertTrue(PossibleDraws[0] != PossibleDraws2[0] &&
+				PossibleDraws[1] != PossibleDraws2[1] &&
+				PossibleDraws[2] != PossibleDraws2[2] &&
+				PossibleDraws[3] != PossibleDraws2[3] 
 				); 
 		
 		 

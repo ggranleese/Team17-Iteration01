@@ -33,6 +33,10 @@ private ArrayList<Tile> pile;
 	public void removeTile() {
 		this.pile.remove(0);
 	}
+	
+	public void populate() {
+		
+	}
 
 	//GETTERS
 	public Tile getTile(int index) {

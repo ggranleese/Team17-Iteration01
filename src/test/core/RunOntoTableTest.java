@@ -22,7 +22,6 @@ public class RunOntoTableTest extends TestCase{
 		
 		Table table = new Table();
 		table.add(run);
-		System.out.println(table.getMelds().size()); 
 		
 		Assert.assertTrue(table.getMelds().get(0).getTypeOfMeld() == 1);
 	}

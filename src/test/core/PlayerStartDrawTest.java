@@ -12,7 +12,7 @@ public class PlayerStartDrawTest extends TestCase{
 	public void test() {
 		int PossibleDraws[] = {1,2,3,4};
 		int PossibleDraws2[] = {1,2,3,4};
-		Rummikub.StartDraw(PossibleDraws2);
+		Rummikub.startDraw(PossibleDraws2);
 		
 		
 		assertTrue(PossibleDraws[0] != PossibleDraws2[0] &&

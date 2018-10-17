@@ -12,8 +12,6 @@ public class PlayerHand {
 		this.hand = new ArrayList<Tile>();
 	}
 	
-
-	
 	//METHODS
 	public void drawHand(Pile pile) {
 		for(int i = 0; i<14; i++)

@@ -1,17 +1,17 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Player implements Observer{
 	//MEMBERS
 	private ArrayList<Tile> hand;
 	private Boolean status;
+	private Boolean isBot;
 	private	ArrayList<Meld> Melds;
 	private Pile pile;
 	//CONSTRUCTORS
 	public Player() {
-		
+		this.isBot = false;
 		this.hand = new ArrayList<Tile>();
 	}
 	
@@ -236,5 +236,9 @@ public class Player implements Observer{
 	}
 	public int getSize() {
 		return this.hand.size();
+	}
+
+	public Boolean getIsBot() {
+		return this.isBot;
 	}
 }

@@ -5,28 +5,34 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Rummikub {
-
+	Table table = new Table();
 	public static void main(String[] args) {
 		Player[] players = null;
 		Pile pile;
 		
 		//Start the Game
 		System.out.println("hey man welcome to Rummikub");
+		int bots;
+		while(true) {
+			Scanner numBots = new Scanner(System.in);
+			int n = promptNumBotChoice(numBots);
+			if (n > 3 || n < 1) {
+				System.out.println("Invalid choice. Please select between 1 and 3 bots.");
+			}
+			else {
+				bots = n;
+				break;
+			}
+		}
 		
-		//Fill Player[] (How many players?)
-		//--Int n = Number of players
-		
-		//Determining Player Order
-		//--Returns an array where players are represented by the element index
-		//--i.e. Player1 is Array[0], Player2 is Array[1]...
-		//--And the int value at that index is the order they play in
-		//int turnOrder[] = PlayerOrder(n);
-		
-		//Players dealt 14 tiles each
-		//Player with highest tile goes first
+		int PlayerOrder[] = playerOrder(bots + 1);
+		startDraw(PlayerOrder);
+		Player Player[] = playInOrder(PlayerOrder);
+		System.out.println(Player[0]);
 		
 	}
 
+	//Player Order guide
 	private static int[] playerOrder(int n) {
 		int PossibleDraws[] = new int[n];
 		for(int i = 0; i > n; i++) {
@@ -36,6 +42,7 @@ public class Rummikub {
 		return (PossibleDraws);
 	}
 	
+	//Makes Players
 	private static Player[] playInOrder(int[] numArray) {
 		int n = numArray.length;
 		Player[] playerArray = new Player[n];
@@ -46,6 +53,7 @@ public class Rummikub {
 		return playerArray;
 	}
 
+	//Puts players in correct order.
 	static void startDraw(int[] turnOrder) {
 		Random rnd = ThreadLocalRandom.current();
 		    for (int i = turnOrder.length - 1; i > 0; i--)
@@ -58,21 +66,33 @@ public class Rummikub {
 		    }
 	}
 	
-	public static int promptNumBotChoice() {
-		System.out.println("Chose number of bots: ");
-		Scanner numBots = new Scanner(System.in);
-		int n = numBots.nextInt();
-		numBots.close();
-		return n;
+	public static int promptNumBotChoice(Scanner sc) {
+	
+		System.out.println("Choose number of bots: ");
+		if(sc.hasNextLine()) {
+			int userSelection = Integer.parseInt(sc.nextLine());
+			return userSelection;
+			}
+			
+			return -1;
 	}
 	
 	public static int promptRunOrSetChoice() {
-		System.out.println("Chose run or set: ");
+		System.out.println("Choose Run(1) or Set(2): ");
 		Scanner runOrSet = new Scanner(System.in);
 		int n = runOrSet.nextInt();
 		runOrSet.close();
 		return n;
 
+	}
+	
+	public static void PlayerTurn(Observer player) {
+		if(player.getIsBot()) {
+			((AI) player).doTurn();
+		}
+		else {
+			
+		}
 	}
 	
 }

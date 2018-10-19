@@ -1,11 +1,14 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Player {
+public class Player implements Observer{
 	//MEMBERS
 	private ArrayList<Tile> hand;
 	private Boolean status;
+	private	ArrayList<Meld> Melds;
+	private Pile pile;
 	//CONSTRUCTORS
 	public Player() {
 		
@@ -13,9 +16,9 @@ public class Player {
 	}
 	
 	//METHODS
-	public void drawHand(Pile pile) {
+	public void drawHand() {
 		for(int i = 0; i<14; i++)
-			this.hand.add(pile.getPile().get(0));
+			this.hand.add(this.pile.getPile().get(0));
 	}
 	
 	public void removeTile(int c, int v) {
@@ -205,12 +208,21 @@ public class Player {
 		return (output);
 	}
 
-	public Tile getTile(int i) {
-		return this.hand.get(i);
+	public Integer playMeld(Meld m) {
+		return null;
 	}
 	
 	public void addTile(Tile t) {
 		this.hand.add(t);
+	}
+
+	public void update(Table table) {
+		this.pile = table.getPile();
+		this.Melds = table.getMelds();
+	}
+	
+	public void pushToTable(Table table) {
+		table.updateTable(this.Melds, this.pile);
 	}
 	//GETTERS
 	public ArrayList<Tile> getHand() {
@@ -218,6 +230,9 @@ public class Player {
 	}
 	public Boolean getStatus() {
 		return this.status;
+	}
+	public Tile getTile(int i) {
+		return this.hand.get(i);
 	}
 	public int getSize() {
 		return this.hand.size();

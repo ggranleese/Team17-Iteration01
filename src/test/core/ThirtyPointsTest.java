@@ -15,13 +15,12 @@ public class ThirtyPointsTest {
 		assertTrue(!player1.getStatus());
 		
 		Player player2 = new Player();
-		ArrayList<Tile> hand = player2.getHand();
-		hand.addTile(new Tile(1,7));
-		hand.addTile(new Tile(1,8));
-		hand.addTile(new Tile(1,9));
+		player2.addTile(new Tile(1,7));
+		player2.addTile(new Tile(1,8));
+		player2.addTile(new Tile(1,9));
 		
 		Run run = new Run(player2.getHand());
-		hand.playMeld(run);
+		player2.playMeld(run);
 		
 		assertTrue(player2.getStatus());
 		

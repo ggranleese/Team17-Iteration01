@@ -1,11 +1,14 @@
 package core;
 
+import java.util.Scanner;
+
 import junit.framework.TestCase;
 
 public class RummikubTest extends TestCase {
 
 	public void testNumBotChoice() {
-		int n = Rummikub.promptNumBotChoice();
+		Scanner numBots = new Scanner(System.in);
+		int n = Rummikub.promptNumBotChoice(numBots);
 		assertTrue(n >= 0);
 	}
 	

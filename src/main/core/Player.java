@@ -1,18 +1,20 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.Scanner;
 
 public class Player implements Observer{
 	//MEMBERS
 	private ArrayList<Tile> hand;
 	private Boolean status;
+	private int pointCounter;
 	private	ArrayList<Meld> Melds;
 	private Pile pile;
 	//CONSTRUCTORS
 	public Player() {
-		
 		this.hand = new ArrayList<Tile>();
+		this.status = false;
 	}
 	
 	//METHODS
@@ -208,14 +210,58 @@ public class Player implements Observer{
 		return (output);
 	}
 
-	public Integer playMeld(Meld m) {
-		return null;
+	public void playMeld(Meld m) {
+		
+		this.Melds.add(m);
+	
+		if(this.status == false) {
+			int meldPoints = 0;
+			
+			for(int i = 0; i < m.getTiles().size(); i++) {
+				meldPoints += m.getTiles().get(i).getValue();
+			}
+			
+			this.pointCounter += meldPoints;
+			if(pointCounter >= 30) {
+				this.status = true;
+			}
+		}
 	}
 	
 	public void addTile(Tile t) {
 		this.hand.add(t);
 	}
+	
+	public void doTurn() {
+		System.out.println("1.Play from hand.");
+		System.out.println("2.Play with table.");
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		switch(n) {
+			case 1: 
+				handOptions();
+				break;
+			case 2: 
+				if (this.status == false) {
+					System.out.println("Must have 30 or more points to do this.");
+					doTurn();
+					break;
+				}
+				else
+					break;
+			default:
+				System.out.println("Invalid choice.");
+				doTurn();
+				break;
+		}
+		input.close();
+	}
+	
+	private void handOptions() {
+		System.out.println("Some hand options.");	
+	}
 
+	//OBSERVER METHODS
 	public void update(Table table) {
 		this.pile = table.getPile();
 		this.Melds = table.getMelds();
@@ -237,4 +283,5 @@ public class Player implements Observer{
 	public int getSize() {
 		return this.hand.size();
 	}
+
 }

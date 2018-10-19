@@ -28,7 +28,14 @@ public class Rummikub {
 		int PlayerOrder[] = playerOrder(bots + 1);
 		startDraw(PlayerOrder);
 		Player Player[] = playInOrder(PlayerOrder);
+		
+		//TESTING
 		System.out.println(Player[0]);
+		Player player = new Player();
+		Player bot = new AI(1);
+		
+		player.doTurn();
+		bot.doTurn();
 		
 	}
 
@@ -84,15 +91,6 @@ public class Rummikub {
 		runOrSet.close();
 		return n;
 
-	}
-	
-	public static void PlayerTurn(Observer player) {
-		if(player.getIsBot()) {
-			((AI) player).doTurn();
-		}
-		else {
-			
-		}
 	}
 	
 }

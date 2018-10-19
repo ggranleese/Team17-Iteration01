@@ -13,6 +13,7 @@ private Boolean valid;
 	public Run(ArrayList<Tile> tiles) {
 		this.tiles = tiles;
 		this.valid = checkValid(tiles);
+		this.typeOfMeld = 1;
 	}
 	
 	//METHODS
@@ -35,7 +36,7 @@ private Boolean valid;
 	}
 
 	public int getTypeOfMeld() {
-		return this.typeOfMeld = 1;
+		return this.typeOfMeld;
 	}
 
 	public boolean isValid() {

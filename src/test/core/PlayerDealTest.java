@@ -13,10 +13,10 @@ public class PlayerDealTest extends TestCase{
 	@Test
 	public void test() {
 		Pile pile = new Pile();
-		PlayerHand hand = new PlayerHand();
-		hand.drawHand(pile);
+		Player player = new Player();
+		player.drawHand(pile);
 
-		assertTrue(hand.getHand().size() == 14); 
+		assertTrue(player.getHand().size() == 14); 
 	}
 
 }

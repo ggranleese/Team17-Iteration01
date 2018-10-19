@@ -1,19 +1,17 @@
 package core;
 
-import java.util.ArrayList;
-
 import junit.framework.TestCase;
 
 public class PlayerHandRemoveCardTest extends TestCase{
 	
 	public void testRemoveCard() {
-		ArrayList<Tile> playerHand = new ArrayList<Tile>();
+		Player player = new Player();
 		
-		playerHand.addTile(1,1);
-		playerHand.addTile(1,3);
-		playerHand.removeTile(1,1);
+		player.addTile(new Tile(1,1));
+		player.addTile(new Tile(1,3));
+		player.removeTile(1,1);
 		
-		assertTrue(playerHand.get(0).getValue() == 3);
+		assertTrue(player.getHand().get(0).getValue() == 3);
 	}
 	
 	

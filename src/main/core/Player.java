@@ -294,21 +294,74 @@ public class Player implements Observer{
 	}
 	
 	public void addToMeld() {
-		System.out.println("Select tile from hand:");
-		printTiles(this.hand);
+		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		
 		Scanner input = new Scanner(System.in);
-		int choice = input.nextInt();
-		Tile tile = this.hand.get(choice - 1);
-		this.hand.remove(choice -1);
+		int choice;
+		Meld meld;
 		
-		System.out.println("Select meld to add to:");
-		displayMelds();
-		choice = input.nextInt();
+		while(true) {
+			System.out.println("Select tile from hand:");
+			printTiles(this.hand);
+			choice = input.nextInt();
+			
+			System.out.println("1.Select more");
+			System.out.println("2.Continue");
+			int moreTiles = input.nextInt();
+			
+			if(moreTiles == 1) {
+				try {
+					tiles.add(this.hand.get(choice - 1));
+					this.hand.remove(choice -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				continue;
+			}
+			if(moreTiles == 2) {
+				try {
+					tiles.add(this.hand.get(choice - 1));
+					this.hand.remove(choice -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				break;
+			}
+			else {
+				System.out.println("Invalid.");
+				continue;
+			}
+		}
 		
-		System.out.println("Select position you'd like to add your tile to:");
-		printTiles(Melds.get(choice -1).getTiles());
-		int position = input.nextInt();
-		Melds.get(choice -1).getTiles().add(position -1,tile);
+		while(true) {
+			System.out.println("Select meld to add to:");
+			displayMelds();
+			choice = input.nextInt();
+			try {
+				meld = Melds.get(choice -1);
+				break;
+			}catch (Exception e){
+				System.out.println("Invalid.");
+				continue;
+			}
+		}
+		while(!tiles.isEmpty()) {
+			while(true) {
+				System.out.println("Select position you'd like to add ["+ tiles.get(0).toString()+"] to:");
+				printTiles(Melds.get(choice -1).getTiles());
+				int position = input.nextInt();
+				try {
+				meld.getTiles().add(position -1,tiles.get(0));
+				tiles.remove(0);
+				break;
+				} catch(Exception e) {
+					System.out.println("Invalid.");
+					continue;
+				}
+			}
+		}
 		
 		System.out.println("New Meld:");
 		printTiles(Melds.get(choice -1).getTiles());

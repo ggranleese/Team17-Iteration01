@@ -339,6 +339,7 @@ public class Player implements Observer{
 						System.out.println("Invalid.");
 						continue;
 					}
+				meld = selectMeld();
 				continue;
 			}
 			if(moreTiles == 3) {

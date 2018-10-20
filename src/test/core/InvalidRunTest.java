@@ -26,5 +26,13 @@ public class InvalidRunTest {
 		Run run2 = new Run(tiles2);	
 		
 		assertTrue(!run2.isValid());
+		
+		ArrayList<Tile> tiles3 = new ArrayList<Tile>();
+		tiles3.add(new Tile(1,3));
+		tiles3.add(new Tile(1,4));
+		
+		Run run3 = new Run(tiles3);	
+		
+		assertTrue(!run3.isValid());
 	}
 }

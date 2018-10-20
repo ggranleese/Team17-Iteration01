@@ -349,6 +349,7 @@ public class Player implements Observer{
 	public ArrayList<Meld> checkInvalid(){
 		ArrayList<Meld> invalidMelds = new ArrayList<Meld>();
 		for(Meld m : this.Melds) {
+			System.out.println(m.isValid());
 			if(!m.isValid()) {
 				invalidMelds.add(m);
 			}

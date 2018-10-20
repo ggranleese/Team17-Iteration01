@@ -11,6 +11,8 @@ public class HandToMeldTest extends TestCase{
 		
 		table.registerObserver(player);
 		table.notifyObservers();
+		table.getPile().populate();
+		table.getPile().shuffle();
 		
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		tiles.add(new Tile(1,10));
@@ -21,9 +23,14 @@ public class HandToMeldTest extends TestCase{
 		
 		player.playMeld(run);
 		
-		int initial = table.getMelds().get(0).getTiles().size();
+		player.pushToTable(table);
 		
-		player.addToMeld(table.getMelds().get(0), new Tile(4,10), 3);
+		int initial = table.getMelds().get(0).getTiles().size();
+	
+		player.drawHand();
+		
+		player.addToMeld();
+		player.pushToTable(table);
 		
 		assertTrue(initial < table.getMelds().get(0).getTiles().size());
 		

@@ -28,7 +28,8 @@ public class Rummikub {
 		startDraw(PlayerOrder);
 		Player Player[] = playInOrder(PlayerOrder);
 		
-		//TESTING
+		//-------------------------------------------------------------
+		//FOR TESTING ONLY
 		Table table = new Table();
 		Player player = new Player();
 		Player bot = new AI(1);

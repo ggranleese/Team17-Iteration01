@@ -42,7 +42,7 @@ private Pile pile;
 	public void updateTable(ArrayList<Meld> updatedMelds, Pile updatedPile) {
 		this.Melds = updatedMelds;
 		this.pile = updatedPile;
-		this.notifyObservers();
+		notifyObservers();
 	}
 	//GETTERS
 	public ArrayList<Meld> getMelds() {

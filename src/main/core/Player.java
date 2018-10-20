@@ -6,11 +6,13 @@ import java.util.Scanner;
 
 public class Player implements Observer{
 	//MEMBERS
-	private ArrayList<Tile> hand;
 	private Boolean status;
 	private int pointCounter;
+	private ArrayList<Tile> hand;
+	//These are observed from Table
 	private	ArrayList<Meld> Melds;
 	private Pile pile;
+	
 	//CONSTRUCTORS
 	public Player() {
 		this.hand = new ArrayList<Tile>();
@@ -291,15 +293,25 @@ public class Player implements Observer{
 		input.close();
 	}
 	
-	private void addToMeld() {
+	public void addToMeld() {
 		System.out.println("Select tile from hand:");
 		printTiles(this.hand);
 		Scanner input = new Scanner(System.in);
 		int choice = input.nextInt();
 		Tile tile = this.hand.get(choice - 1);
 		this.hand.remove(choice -1);
+		
 		System.out.println("Select meld to add to:");
 		displayMelds();
+		choice = input.nextInt();
+		
+		System.out.println("Select position you'd like to add your tile to:");
+		printTiles(Melds.get(choice -1).getTiles());
+		int position = input.nextInt();
+		Melds.get(choice -1).getTiles().add(position -1,tile);
+		
+		System.out.println("New Meld:");
+		printTiles(Melds.get(choice -1).getTiles());
 		input.close();
 	}
 	
@@ -308,8 +320,9 @@ public class Player implements Observer{
             printTiles(m.getTiles());
         }
 	}
+	
 	private void printTiles(ArrayList<Tile> tiles) {
-		String printVal = "";
+		String printVal = "[ ";
 		for (Tile t : tiles) {
 			int colour = t.getColour();
 			switch(colour) {
@@ -334,6 +347,7 @@ public class Player implements Observer{
 					break;
 			}
 		}
+		printVal += "]";
 		System.out.println(printVal);
 	}
 
@@ -347,6 +361,7 @@ public class Player implements Observer{
 		table.updateTable(this.Melds, this.pile);
 	}
 	//GETTERS
+	
 	//GETTERS
 	public ArrayList<Tile> getHand() {
 		return this.hand;

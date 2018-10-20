@@ -336,6 +336,26 @@ public class Player implements Observer{
 		return tiles;
 	}
 	
+	public boolean endTurn() {
+		ArrayList<Meld> invalidMelds = checkInvalid();
+		if(invalidMelds.isEmpty()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public ArrayList<Meld> checkInvalid(){
+		ArrayList<Meld> invalidMelds = new ArrayList<Meld>();
+		for(Meld m : this.Melds) {
+			if(!m.isValid()) {
+				invalidMelds.add(m);
+			}
+		}
+		return invalidMelds;
+	}
+	
 	//UI
 	public void doTurn() {
 		System.out.println("1.Play meld from hand.");
@@ -459,10 +479,8 @@ public class Player implements Observer{
 		printVal += "]";
 		System.out.println(printVal);
 	}
-	public boolean endTurn() {
-		return true;
 		
-	}
+	
 	//OBSERVER METHODS
 	//OBSERVER METHODS
 	public void update(Table table) {

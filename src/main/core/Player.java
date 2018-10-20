@@ -235,31 +235,7 @@ public class Player implements Observer{
 	public void addTile(Tile t) {
 		this.hand.add(t);
 	}
-	
-	public void doTurn() {
-		System.out.println("1.Play meld from hand.");
-		System.out.println("2.Play with table.");
-		int n = input.nextInt();
-		switch(n) {
-			case 1: 
-				handOptions();
-				break;
-			case 2: 
-				if (this.status == false) {
-					System.out.println("Must have 30 or more points to do this.");
-					doTurn();
-					break;
-				}
-				else {
-					tableOptions();
-					break;
-				}
-			default:
-				System.out.println("Invalid choice.");
-				doTurn();
-				break;
-		}
-	}
+
 	
 	public ArrayList<Tile> fromHand() {
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
@@ -361,6 +337,34 @@ public class Player implements Observer{
 	}
 	
 	//UI
+	public void doTurn() {
+		System.out.println("1.Play meld from hand.");
+		System.out.println("2.Play with table.");
+		System.out.println("3.End turn.");
+		int n = input.nextInt();
+		switch(n) {
+			case 1: 
+				handOptions();
+				break;
+			case 2: 
+				if (this.status == false) {
+					System.out.println("Must have 30 or more points to do this.");
+					doTurn();
+					break;
+				}
+				else {
+					tableOptions();
+					break;
+				}
+			case 3:
+				endTurn();
+				break;
+			default:
+				System.out.println("Invalid choice.");
+				doTurn();
+				break;
+		}
+	}
 	private void handOptions() {
 		System.out.println("Some hand options.");	
 	}
@@ -423,6 +427,8 @@ public class Player implements Observer{
 		System.out.println("New Meld:");
 		//printTiles(Melds.get(choice -1).getTiles());
 		displayMelds();
+		System.out.println("----------------------------------------------");
+		doTurn();
 	}
 	
 	public Meld selectMeld() {
@@ -453,7 +459,10 @@ public class Player implements Observer{
 		printVal += "]";
 		System.out.println(printVal);
 	}
-
+	public boolean endTurn() {
+		return true;
+		
+	}
 	//OBSERVER METHODS
 	//OBSERVER METHODS
 	public void update(Table table) {

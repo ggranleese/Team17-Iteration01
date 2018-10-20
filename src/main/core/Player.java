@@ -304,24 +304,12 @@ public class Player implements Observer{
 	public ArrayList<Tile> fromMeld(){
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		Meld meld;
-		int meldNum;
 		int tileNum;
-		while(true) {
-			System.out.println("Select meld to take from:");
-			displayMelds();
-			meldNum = input.nextInt();
-			try {
-				meld = Melds.get(meldNum -1);
-				break;
-			}catch (Exception e){
-				System.out.println("Invalid.");
-				continue;
-			}
-		}
+		meld = selectMeld();
 		while(true) {
 			if(meld.getTiles().isEmpty()) {
 				System.out.println("This meld is empty!");
-				this.Melds.remove(meldNum -1);
+				this.Melds.remove(meld);
 				break;
 			}
 			System.out.println("Select tiles:");
@@ -334,6 +322,16 @@ public class Player implements Observer{
 			int moreTiles = input.nextInt();
 			
 			if(moreTiles == 1) {
+				try {
+					tiles.add(meld.getTiles().get(tileNum - 1));
+					meld.getTiles().remove(tileNum -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				continue;
+			}
+			if(moreTiles == 2) {
 				try {
 					tiles.add(meld.getTiles().get(tileNum - 1));
 					meld.getTiles().remove(tileNum -1);
@@ -360,7 +358,7 @@ public class Player implements Observer{
 		}
 		return tiles;
 	}
-
+	
 	//UI
 	private void handOptions() {
 		System.out.println("Some hand options.");	
@@ -426,6 +424,20 @@ public class Player implements Observer{
 		displayMelds();
 	}
 	
+	public Meld selectMeld() {
+		int meldNum;
+		while(true) {
+			System.out.println("Select meld to take from:");
+			displayMelds();
+			meldNum = input.nextInt();
+			try {
+				return Melds.get(meldNum -1);
+			}catch (Exception e){
+				System.out.println("Invalid.");
+				continue;
+			}
+		}
+	}
 	private void displayMelds() {
 		for(Meld m : this.Melds) {
             printTiles(m.getTiles());

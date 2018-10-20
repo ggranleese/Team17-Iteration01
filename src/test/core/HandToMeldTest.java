@@ -29,7 +29,7 @@ public class HandToMeldTest extends TestCase{
 	
 		player.drawHand();
 		
-		player.addToMeld();
+		player.addToMeld(player.fromHand());
 		player.pushToTable(table);
 		
 		assertTrue(initial < table.getMelds().get(0).getTiles().size());

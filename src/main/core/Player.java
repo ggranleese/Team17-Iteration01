@@ -1,7 +1,6 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Player implements Observer{
@@ -9,6 +8,7 @@ public class Player implements Observer{
 	private Boolean status;
 	private int pointCounter;
 	private ArrayList<Tile> hand;
+	Scanner input = new Scanner(System.in);
 	//These are observed from Table
 	private	ArrayList<Meld> Melds;
 	private Pile pile;
@@ -239,7 +239,6 @@ public class Player implements Observer{
 	public void doTurn() {
 		System.out.println("1.Play meld from hand.");
 		System.out.println("2.Play with table.");
-		Scanner input = new Scanner(System.in);
 		int n = input.nextInt();
 		switch(n) {
 			case 1: 
@@ -260,46 +259,11 @@ public class Player implements Observer{
 				doTurn();
 				break;
 		}
-		input.close();
 	}
 	
-	//UI
-	private void handOptions() {
-		System.out.println("Some hand options.");	
-	}
-	
-	private void tableOptions( ) {
-		System.out.println("1.Add tile(s) from hand to a meld.");
-		System.out.println("2.Take tile(s) from a meld.");
-		System.out.println("3.Back");
-		
-		Scanner input = new Scanner(System.in);
-		int n = input.nextInt();
-		switch(n) {
-			case 1:
-				addToMeld();
-				break;
-			case 2: 
-				
-				break;
-			case 3:
-				tableOptions();
-				break;
-			default:
-				System.out.println("Invalid choice.");
-				tableOptions();
-				break;
-		}
-		input.close();
-	}
-	
-	public void addToMeld() {
+	public ArrayList<Tile> fromHand() {
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
-		
-		Scanner input = new Scanner(System.in);
 		int choice;
-		Meld meld;
-		
 		while(true) {
 			System.out.println("Select tile from hand:");
 			printTiles(this.hand);
@@ -334,6 +298,40 @@ public class Player implements Observer{
 				continue;
 			}
 		}
+		return tiles;
+	}
+	
+	//UI
+	private void handOptions() {
+		System.out.println("Some hand options.");	
+	}
+	
+	private void tableOptions( ) {
+		System.out.println("1.Add tile(s) from hand to a meld.");
+		System.out.println("2.Take tile(s) from a meld.");
+		System.out.println("3.Back");
+		
+		int n = input.nextInt();
+		switch(n) {
+			case 1:
+				addToMeld(fromHand());
+				break;
+			case 2: 
+				
+				break;
+			case 3:
+				tableOptions();
+				break;
+			default:
+				System.out.println("Invalid choice.");
+				tableOptions();
+				break;
+		}
+	}
+	
+	public void addToMeld(ArrayList<Tile> tiles) {
+		int choice;
+		Meld meld;
 		
 		while(true) {
 			System.out.println("Select meld to add to:");
@@ -365,7 +363,6 @@ public class Player implements Observer{
 		
 		System.out.println("New Meld:");
 		printTiles(Melds.get(choice -1).getTiles());
-		input.close();
 	}
 	
 	private void displayMelds() {
@@ -377,28 +374,7 @@ public class Player implements Observer{
 	private void printTiles(ArrayList<Tile> tiles) {
 		String printVal = "[ ";
 		for (Tile t : tiles) {
-			int colour = t.getColour();
-			switch(colour) {
-				case 1:
-					printVal += "B";
-					printVal += Integer.toString(t.getValue()) + " ";
-					break;
-				case 2: 
-					printVal += "R";
-					printVal += Integer.toString(t.getValue()) + " ";
-					break;
-				case 3:
-					printVal += "G";
-					printVal += Integer.toString(t.getValue()) + " ";
-					break;
-				case 4:
-					printVal += "O";
-					printVal += Integer.toString(t.getValue()) + " ";
-					break;
-				default:
-					System.out.println("Invalid tile found.");
-					break;
-			}
+			printVal += t.toString() + " ";
 		}
 		printVal += "]";
 		System.out.println(printVal);

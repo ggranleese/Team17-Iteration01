@@ -30,7 +30,7 @@ public class MultipleHandToMeldTest extends TestCase{
 	
 		player.drawHand();
 		
-		player.addToMeld();
+		player.addToMeld(player.fromHand());
 		player.pushToTable(table);
 		
 		assertTrue(initial + 1 < table.getMelds().get(0).getTiles().size());

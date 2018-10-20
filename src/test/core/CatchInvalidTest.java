@@ -1,7 +1,5 @@
 package core;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
@@ -11,7 +9,7 @@ public class CatchInvalidTest extends TestCase{
 	public void test() {
 		Table table = new Table();
 		Player player = new Player();
-		
+		table.getPile().populate();
 		table.registerObserver(player);
 		table.notifyObservers();
 		
@@ -41,16 +39,15 @@ public class CatchInvalidTest extends TestCase{
 		Set set = new Set(tiles3);
 		Set set2 = new Set(tiles4);
 		
-		System.out.println(table.getMelds().size());
 		player.playMeld(run);
 		player.playMeld(run2);
 		player.playMeld(set);
 		player.playMeld(set2);
-		System.out.println(table.getMelds().size());
-		player.endTurn();
-		System.out.println(table.getMelds().size());
+
+		if(player.endTurn())
+			player.pushToTable(table);
 		
-		assertTrue(table.getMelds().get(0) == null);
+		assertTrue(table.getMelds().isEmpty());
 	
 	}
 

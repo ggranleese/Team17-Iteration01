@@ -11,7 +11,6 @@ public class Player implements Observer{
 	Scanner input = new Scanner(System.in);
 	//These are observed from Table
 	private	ArrayList<Meld> Melds;
-	private Pile pile;
 	
 	//CONSTRUCTORS
 	public Player() {
@@ -20,9 +19,9 @@ public class Player implements Observer{
 	}
 	
 	//METHODS
-	public void drawHand() {
+	public void drawHand(Pile pile) {
 		for(int i = 0; i<14; i++)
-			this.hand.add(this.pile.getPile().get(i));
+			this.hand.add(pile.getPile().get(i));
 			pile.removeTile();
 	}
 	
@@ -349,7 +348,6 @@ public class Player implements Observer{
 	public ArrayList<Meld> checkInvalid(){
 		ArrayList<Meld> invalidMelds = new ArrayList<Meld>();
 		for(Meld m : this.Melds) {
-			System.out.println(m.isValid());
 			if(!m.isValid()) {
 				invalidMelds.add(m);
 			}
@@ -485,11 +483,10 @@ public class Player implements Observer{
 	//OBSERVER METHODS
 	//OBSERVER METHODS
 	public void update(Table table) {
-		this.pile = table.getPile();
-		this.Melds = table.getMelds();
+		this.Melds = (ArrayList<Meld>) table.getMelds().clone();
 	}
 	public void pushToTable(Table table) {
-		table.updateTable(this.Melds, this.pile);
+		table.updateTable(this.Melds);
 	}
 	//GETTERS
 	

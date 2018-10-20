@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Rummikub {
 	public static void main(String[] args) {
 		Player[] players = null;
-		Pile pile;
+		Pile pile = new Pile();
 		
 		//Start the Game
 		System.out.println("hey man welcome to Rummikub");
@@ -67,7 +67,7 @@ public class Rummikub {
 		player.pushToTable(table);
 		
 		
-		player.drawHand();
+		player.drawHand(pile);
 		player.doTurn();
 		bot.doTurn();
 		

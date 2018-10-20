@@ -39,9 +39,8 @@ private Pile pile;
 		}
 		
 	}
-	public void updateTable(ArrayList<Meld> updatedMelds, Pile updatedPile) {
+	public void updateTable(ArrayList<Meld> updatedMelds) {
 		this.Melds = updatedMelds;
-		this.pile = updatedPile;
 		notifyObservers();
 	}
 	//GETTERS

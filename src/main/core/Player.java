@@ -301,13 +301,73 @@ public class Player implements Observer{
 		return tiles;
 	}
 	
+	public ArrayList<Tile> fromMeld(){
+		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		Meld meld;
+		int meldNum;
+		int tileNum;
+		while(true) {
+			System.out.println("Select meld to take from:");
+			displayMelds();
+			meldNum = input.nextInt();
+			try {
+				meld = Melds.get(meldNum -1);
+				break;
+			}catch (Exception e){
+				System.out.println("Invalid.");
+				continue;
+			}
+		}
+		while(true) {
+			if(meld.getTiles().isEmpty()) {
+				System.out.println("This meld is empty!");
+				this.Melds.remove(meldNum -1);
+				break;
+			}
+			System.out.println("Select tiles:");
+			printTiles(meld.getTiles());
+			tileNum = input.nextInt();
+			
+			System.out.println("1.Select more from this meld");
+			System.out.println("2.Select from different meld");
+			System.out.println("3.Done");
+			int moreTiles = input.nextInt();
+			
+			if(moreTiles == 1) {
+				try {
+					tiles.add(meld.getTiles().get(tileNum - 1));
+					meld.getTiles().remove(tileNum -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				continue;
+			}
+			if(moreTiles == 3) {
+				try {
+					tiles.add(meld.getTiles().get(tileNum - 1));
+					meld.getTiles().remove(tileNum -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				break;
+			}
+			else {
+				System.out.println("Invalid.");
+				continue;
+			}
+		}
+		return tiles;
+	}
+
 	//UI
 	private void handOptions() {
 		System.out.println("Some hand options.");	
 	}
 	
 	private void tableOptions( ) {
-		System.out.println("1.Add tile(s) from hand to a meld.");
+		System.out.println("1.Take tile(s) from hand.");
 		System.out.println("2.Take tile(s) from a meld.");
 		System.out.println("3.Back");
 		
@@ -317,7 +377,7 @@ public class Player implements Observer{
 				addToMeld(fromHand());
 				break;
 			case 2: 
-				
+				addToMeld(fromMeld());
 				break;
 			case 3:
 				tableOptions();
@@ -362,7 +422,8 @@ public class Player implements Observer{
 		}
 		
 		System.out.println("New Meld:");
-		printTiles(Melds.get(choice -1).getTiles());
+		//printTiles(Melds.get(choice -1).getTiles());
+		displayMelds();
 	}
 	
 	private void displayMelds() {

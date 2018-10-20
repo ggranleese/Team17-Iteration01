@@ -44,13 +44,28 @@ public class Rummikub {
 		tiles.add(new Tile(2,10));
 		tiles.add(new Tile(3,10));
 		
+		ArrayList<Tile> tiles2 = new ArrayList<Tile>();
+		tiles2.add(new Tile(1,3));
+		tiles2.add(new Tile(2,3));
+		tiles2.add(new Tile(3,3));
+		tiles2.add(new Tile(4,3));
+		
+		ArrayList<Tile> tiles3 = new ArrayList<Tile>();
+		tiles3.add(new Tile(1,8));
+		tiles3.add(new Tile(1,9));
+		tiles3.add(new Tile(1,10));
+		
 		Run run = new Run(tiles);
+		Run run2 = new Run(tiles2);
+		Set set = new Set(tiles3);
 		
 		player.playMeld(run);
-		player.playMeld(run);
-		player.playMeld(run);
+		player.playMeld(run2);
+		player.playMeld(set);
+		
 		
 		player.pushToTable(table);
+		
 		
 		player.drawHand();
 		player.doTurn();

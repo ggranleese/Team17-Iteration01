@@ -1,16 +1,18 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Player implements Observer{
 	//MEMBERS
-	private ArrayList<Tile> hand;
 	private Boolean status;
 	private int pointCounter;
+	private ArrayList<Tile> hand;
+	Scanner input = new Scanner(System.in);
+	//These are observed from Table
 	private	ArrayList<Meld> Melds;
 	private Pile pile;
+	
 	//CONSTRUCTORS
 	public Player() {
 		this.hand = new ArrayList<Tile>();
@@ -20,7 +22,8 @@ public class Player implements Observer{
 	//METHODS
 	public void drawHand() {
 		for(int i = 0; i<14; i++)
-			this.hand.add(this.pile.getPile().get(0));
+			this.hand.add(this.pile.getPile().get(i));
+			pile.removeTile();
 	}
 	
 	public void removeTile(int c, int v) {
@@ -35,6 +38,7 @@ public class Player implements Observer{
 		}
 	}
 	
+	/*
 	public String toString() {
 		String output = "";
 		for(int i=0; i<this.getSize(); i++){
@@ -209,7 +213,7 @@ public class Player implements Observer{
 		}
 		return (output);
 	}
-
+*/
 	public void playMeld(Meld m) {
 		
 		this.Melds.add(m);
@@ -231,11 +235,112 @@ public class Player implements Observer{
 	public void addTile(Tile t) {
 		this.hand.add(t);
 	}
+
 	
+	public ArrayList<Tile> fromHand() {
+		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		int choice;
+		while(true) {
+			System.out.println("Select tile from hand:");
+			printTiles(this.hand);
+			choice = input.nextInt();
+			
+			System.out.println("1.Select more");
+			System.out.println("2.Continue");
+			int moreTiles = input.nextInt();
+			
+			if(moreTiles == 1) {
+				try {
+					tiles.add(this.hand.get(choice - 1));
+					this.hand.remove(choice -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				continue;
+			}
+			if(moreTiles == 2) {
+				try {
+					tiles.add(this.hand.get(choice - 1));
+					this.hand.remove(choice -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				break;
+			}
+			else {
+				System.out.println("Invalid.");
+				continue;
+			}
+		}
+		return tiles;
+	}
+	
+	public ArrayList<Tile> fromMeld(){
+		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		Meld meld;
+		int tileNum;
+		meld = selectMeld();
+		while(true) {
+			if(meld.getTiles().isEmpty()) {
+				System.out.println("This meld is empty!");
+				this.Melds.remove(meld);
+				break;
+			}
+			System.out.println("Select tiles:");
+			printTiles(meld.getTiles());
+			tileNum = input.nextInt();
+			
+			System.out.println("1.Select more from this meld");
+			System.out.println("2.Select from different meld");
+			System.out.println("3.Done");
+			int moreTiles = input.nextInt();
+			
+			if(moreTiles == 1) {
+				try {
+					tiles.add(meld.getTiles().get(tileNum - 1));
+					meld.getTiles().remove(tileNum -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				continue;
+			}
+			if(moreTiles == 2) {
+				try {
+					tiles.add(meld.getTiles().get(tileNum - 1));
+					meld.getTiles().remove(tileNum -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				meld = selectMeld();
+				continue;
+			}
+			if(moreTiles == 3) {
+				try {
+					tiles.add(meld.getTiles().get(tileNum - 1));
+					meld.getTiles().remove(tileNum -1);
+					}catch(Exception e) {
+						System.out.println("Invalid.");
+						continue;
+					}
+				break;
+			}
+			else {
+				System.out.println("Invalid.");
+				continue;
+			}
+		}
+		return tiles;
+	}
+	
+	//UI
 	public void doTurn() {
-		System.out.println("1.Play from hand.");
+		System.out.println("1.Play meld from hand.");
 		System.out.println("2.Play with table.");
-		Scanner input = new Scanner(System.in);
+		System.out.println("3.End turn.");
 		int n = input.nextInt();
 		switch(n) {
 			case 1: 
@@ -247,29 +352,128 @@ public class Player implements Observer{
 					doTurn();
 					break;
 				}
-				else
+				else {
+					tableOptions();
 					break;
+				}
+			case 3:
+				endTurn();
+				break;
 			default:
 				System.out.println("Invalid choice.");
 				doTurn();
 				break;
 		}
-		input.close();
 	}
-	
 	private void handOptions() {
 		System.out.println("Some hand options.");	
 	}
-
+	
+	private void tableOptions( ) {
+		System.out.println("1.Take tile(s) from hand.");
+		System.out.println("2.Take tile(s) from a meld.");
+		System.out.println("3.Back");
+		
+		int n = input.nextInt();
+		switch(n) {
+			case 1:
+				addToMeld(fromHand());
+				break;
+			case 2: 
+				addToMeld(fromMeld());
+				break;
+			case 3:
+				tableOptions();
+				break;
+			default:
+				System.out.println("Invalid choice.");
+				tableOptions();
+				break;
+		}
+	}
+	
+	public void addToMeld(ArrayList<Tile> tiles) {
+		int choice;
+		Meld meld;
+		
+		while(true) {
+			System.out.println("Select meld to add to:");
+			displayMelds();
+			choice = input.nextInt();
+			try {
+				meld = Melds.get(choice -1);
+				break;
+			}catch (Exception e){
+				System.out.println("Invalid.");
+				continue;
+			}
+		}
+		while(!tiles.isEmpty()) {
+			while(true) {
+				System.out.println("Select position you'd like to add ["+ tiles.get(0).toString()+"] to:");
+				printTiles(Melds.get(choice -1).getTiles());
+				int position = input.nextInt();
+				try {
+				meld.getTiles().add(position -1,tiles.get(0));
+				tiles.remove(0);
+				break;
+				} catch(Exception e) {
+					System.out.println("Invalid.");
+					continue;
+				}
+			}
+		}
+		
+		System.out.println("New Meld:");
+		//printTiles(Melds.get(choice -1).getTiles());
+		displayMelds();
+		System.out.println("----------------------------------------------");
+		doTurn();
+	}
+	
+	public Meld selectMeld() {
+		int meldNum;
+		while(true) {
+			System.out.println("Select meld to take from:");
+			displayMelds();
+			meldNum = input.nextInt();
+			try {
+				return Melds.get(meldNum -1);
+			}catch (Exception e){
+				System.out.println("Invalid.");
+				continue;
+			}
+		}
+	}
+	private void displayMelds() {
+		for(Meld m : this.Melds) {
+            printTiles(m.getTiles());
+        }
+	}
+	
+	private void printTiles(ArrayList<Tile> tiles) {
+		String printVal = "[ ";
+		for (Tile t : tiles) {
+			printVal += t.toString() + " ";
+		}
+		printVal += "]";
+		System.out.println(printVal);
+	}
+	public boolean endTurn() {
+		return true;
+		
+	}
+	//OBSERVER METHODS
 	//OBSERVER METHODS
 	public void update(Table table) {
 		this.pile = table.getPile();
 		this.Melds = table.getMelds();
 	}
-	
 	public void pushToTable(Table table) {
 		table.updateTable(this.Melds, this.pile);
 	}
+	//GETTERS
+	
 	//GETTERS
 	public ArrayList<Tile> getHand() {
 		return this.hand;

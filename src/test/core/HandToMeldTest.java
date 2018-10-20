@@ -23,7 +23,7 @@ public class HandToMeldTest extends TestCase{
 		
 		int initial = table.getMelds().get(0).getTiles().size();
 		
-		player.addToMeld(0, table.getMelds().get(0));
+		player.addToMeld(table.getMelds().get(0), new Tile(4,10), 3);
 		
 		assertTrue(initial < table.getMelds().get(0).getTiles().size());
 		

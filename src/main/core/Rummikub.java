@@ -5,7 +5,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Rummikub {
-	Table table = new Table();
 	public static void main(String[] args) {
 		Player[] players = null;
 		Pile pile;
@@ -30,10 +29,29 @@ public class Rummikub {
 		Player Player[] = playInOrder(PlayerOrder);
 		
 		//TESTING
-		System.out.println(Player[0]);
+		Table table = new Table();
 		Player player = new Player();
 		Player bot = new AI(1);
 		
+		table.registerObserver(player);
+		table.notifyObservers();
+		table.getPile().populate();
+		table.getPile().shuffle();
+		
+		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		tiles.add(new Tile(1,10));
+		tiles.add(new Tile(2,10));
+		tiles.add(new Tile(3,10));
+		
+		Run run = new Run(tiles);
+		
+		player.playMeld(run);
+		player.playMeld(run);
+		player.playMeld(run);
+		
+		player.pushToTable(table);
+		
+		player.drawHand();
 		player.doTurn();
 		bot.doTurn();
 		

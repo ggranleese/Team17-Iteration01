@@ -20,7 +20,8 @@ public class Player implements Observer{
 	//METHODS
 	public void drawHand() {
 		for(int i = 0; i<14; i++)
-			this.hand.add(this.pile.getPile().get(0));
+			this.hand.add(this.pile.getPile().get(i));
+			pile.removeTile();
 	}
 	
 	public void removeTile(int c, int v) {
@@ -35,6 +36,7 @@ public class Player implements Observer{
 		}
 	}
 	
+	/*
 	public String toString() {
 		String output = "";
 		for(int i=0; i<this.getSize(); i++){
@@ -209,7 +211,7 @@ public class Player implements Observer{
 		}
 		return (output);
 	}
-
+*/
 	public void playMeld(Meld m) {
 		
 		this.Melds.add(m);
@@ -233,7 +235,7 @@ public class Player implements Observer{
 	}
 	
 	public void doTurn() {
-		System.out.println("1.Play from hand.");
+		System.out.println("1.Play meld from hand.");
 		System.out.println("2.Play with table.");
 		Scanner input = new Scanner(System.in);
 		int n = input.nextInt();
@@ -247,8 +249,10 @@ public class Player implements Observer{
 					doTurn();
 					break;
 				}
-				else
+				else {
+					tableOptions();
 					break;
+				}
 			default:
 				System.out.println("Invalid choice.");
 				doTurn();
@@ -257,19 +261,92 @@ public class Player implements Observer{
 		input.close();
 	}
 	
+	//UI
 	private void handOptions() {
 		System.out.println("Some hand options.");	
 	}
+	
+	private void tableOptions( ) {
+		System.out.println("1.Add tile(s) from hand to a meld.");
+		System.out.println("2.Take tile(s) from a meld.");
+		System.out.println("3.Back");
+		
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		switch(n) {
+			case 1:
+				addToMeld();
+				break;
+			case 2: 
+				
+				break;
+			case 3:
+				tableOptions();
+				break;
+			default:
+				System.out.println("Invalid choice.");
+				tableOptions();
+				break;
+		}
+		input.close();
+	}
+	
+	private void addToMeld() {
+		System.out.println("Select tile from hand:");
+		printTiles(this.hand);
+		Scanner input = new Scanner(System.in);
+		int choice = input.nextInt();
+		Tile tile = this.hand.get(choice - 1);
+		this.hand.remove(choice -1);
+		System.out.println("Select meld to add to:");
+		displayMelds();
+		input.close();
+	}
+	
+	private void displayMelds() {
+		for(Meld m : this.Melds) {
+            printTiles(m.getTiles());
+        }
+	}
+	private void printTiles(ArrayList<Tile> tiles) {
+		String printVal = "";
+		for (Tile t : tiles) {
+			int colour = t.getColour();
+			switch(colour) {
+				case 1:
+					printVal += "B";
+					printVal += Integer.toString(t.getValue()) + " ";
+					break;
+				case 2: 
+					printVal += "R";
+					printVal += Integer.toString(t.getValue()) + " ";
+					break;
+				case 3:
+					printVal += "G";
+					printVal += Integer.toString(t.getValue()) + " ";
+					break;
+				case 4:
+					printVal += "O";
+					printVal += Integer.toString(t.getValue()) + " ";
+					break;
+				default:
+					System.out.println("Invalid tile found.");
+					break;
+			}
+		}
+		System.out.println(printVal);
+	}
 
+	//OBSERVER METHODS
 	//OBSERVER METHODS
 	public void update(Table table) {
 		this.pile = table.getPile();
 		this.Melds = table.getMelds();
 	}
-	
 	public void pushToTable(Table table) {
 		table.updateTable(this.Melds, this.pile);
 	}
+	//GETTERS
 	//GETTERS
 	public ArrayList<Tile> getHand() {
 		return this.hand;

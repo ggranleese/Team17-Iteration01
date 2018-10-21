@@ -21,9 +21,14 @@ public class Player implements Observer{
 	
 	//METHODS
 	public void drawHand(Pile pile) {
-		for(int i = 0; i<14; i++)
-			this.hand.add(pile.getPile().get(i));
+		System.out.println("Drawing Hand...");
+		for(int i = 0; i<14; i++) {
+			drawTile(pile);
 			pile.removeTile();
+		}
+		System.out.println("Your Hand:");
+		printTiles(this.hand);
+		System.out.println("\n");
 	}
 	
 	public void removeTile(int c, int v) {
@@ -238,6 +243,7 @@ public class Player implements Observer{
 
 	public void drawTile(Pile p) {
 		this.hand.add(p.getTile(0));
+		p.removeTile();
 	}
 	
 	public ArrayList<Tile> fromHand() {
@@ -361,6 +367,7 @@ public class Player implements Observer{
 	
 	//UI
 	public void doTurn() {
+		System.out.println("USER TURN");
 		System.out.println("1.Play meld from hand.");
 		System.out.println("2.Play with table.");
 		System.out.println("3.End turn.");
@@ -389,10 +396,26 @@ public class Player implements Observer{
 		}
 	}
 	private void handOptions() {
-		System.out.println("Some hand options.");	
+		System.out.println("Some hand options... (N/A)");
+		System.out.println("2.Back");
+		
+		int n = input.nextInt();
+		switch(n) {
+			case 1:
+				System.out.println("Put stuff here.");
+				break;
+			case 2: 
+				doTurn();
+				break;
+			default:
+				System.out.println("Invalid choice.");
+				handOptions();
+				break;
+		}
 	}
 	
 	private void tableOptions( ) {
+		System.out.println("TABLE OPTIONS");
 		System.out.println("1.Take tile(s) from hand.");
 		System.out.println("2.Take tile(s) from a meld.");
 		System.out.println("3.Back");
@@ -406,7 +429,7 @@ public class Player implements Observer{
 				addToMeld(fromMeld());
 				break;
 			case 3:
-				tableOptions();
+				doTurn();
 				break;
 			default:
 				System.out.println("Invalid choice.");

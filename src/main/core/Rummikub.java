@@ -7,7 +7,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Rummikub {
 	public static void main(String[] args) {
 		Player[] players = null;
-		Pile pile = new Pile();
 		
 		//Start the Game
 		System.out.println("hey man welcome to Rummikub");
@@ -24,6 +23,7 @@ public class Rummikub {
 			}
 		}
 		
+		//I have no idea how your player turn methods work pls do
 		int PlayerOrder[] = playerOrder(bots + 1);
 		startDraw(PlayerOrder);
 		Player Player[] = playInOrder(PlayerOrder);
@@ -32,9 +32,12 @@ public class Rummikub {
 		//FOR TESTING ONLY
 		Table table = new Table();
 		Player player = new Player();
+		Player player2 = new Player();
 		Player bot = new AI(1);
 		
 		table.registerObserver(player);
+		table.registerObserver(player2);
+		table.registerObserver(bot);
 		table.notifyObservers();
 		table.getPile().populate();
 		table.getPile().shuffle();
@@ -53,22 +56,30 @@ public class Rummikub {
 		ArrayList<Tile> tiles3 = new ArrayList<Tile>();
 		tiles3.add(new Tile(1,8));
 		tiles3.add(new Tile(1,9));
-		tiles3.add(new Tile(1,10));
+		tiles3.add(new Tile(3,10));
 		
-		Run run = new Run(tiles);
-		Run run2 = new Run(tiles2);
-		Set set = new Set(tiles3);
+		Set run = new Set(tiles);
+		Set run2 = new Set(tiles2);
+		Run set = new Run(tiles3);
 		
 		player.playMeld(run);
 		player.playMeld(run2);
 		player.playMeld(set);
 		
+		player.drawHand(table.getPile());
 		
-		player.pushToTable(table);
-		
-		
-		player.drawHand(pile);
 		player.doTurn();
+		if(player.endTurn()) {
+			player.pushToTable(table);
+		}
+		else {
+			System.out.println("Invalid melds played bro\n");
+		}
+	
+		player2.drawHand(table.getPile());
+		player2.doTurn();
+		if(player2.endTurn())
+			player2.pushToTable(table);
 		bot.doTurn();
 		
 	}

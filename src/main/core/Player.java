@@ -11,6 +11,7 @@ public class Player implements Observer{
 	Scanner input = new Scanner(System.in);
 	//These are observed from Table
 	private	ArrayList<Meld> Melds;
+	private boolean gameOver = false;
 	
 	//CONSTRUCTORS
 	public Player() {
@@ -486,7 +487,10 @@ public class Player implements Observer{
 		this.Melds = (ArrayList<Meld>) table.getMelds().clone();
 	}
 	public void pushToTable(Table table) {
-		table.updateTable(this.Melds);
+		if (this.hand.isEmpty()) {
+			this.gameOver = true;
+		}
+		table.updateTable(this.Melds, this.gameOver);
 	}
 	//GETTERS
 	

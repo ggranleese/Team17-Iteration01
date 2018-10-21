@@ -1,7 +1,5 @@
 package core;
 
-import java.util.ArrayList;
-
 import junit.framework.TestCase;
 
 public class EndGameTest extends TestCase{
@@ -29,7 +27,6 @@ public class EndGameTest extends TestCase{
 		
 		assertTrue(table.getGameOver());
 		
-	
 	}
 
 }

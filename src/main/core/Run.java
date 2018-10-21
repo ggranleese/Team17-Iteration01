@@ -7,27 +7,40 @@ public class Run implements Meld{
 	//MEMBERS
 private	ArrayList<Tile> tiles;
 private int typeOfMeld;
-private Boolean valid;
+private boolean valid;
 
 	//CONSTRUCTORS
 	public Run(ArrayList<Tile> tiles) {
 		this.tiles = tiles;
-		this.valid = checkValid(tiles);
+		checkValid(tiles);
 		this.typeOfMeld = 1;
 	}
 	
 	//METHODS
-	private Boolean checkValid(ArrayList<Tile> tiles) {
-		  for(int i=1; i< tiles.size();i++){
-			  //checks colours are equal
-		      if(tiles.get(i-1).getValue()>tiles.get(i).getValue()) {
-		            return false;
-		        }
-		      //checks values are incrementing by 1
-		        if(tiles.get(i).getValue() - tiles.get(i-1).getValue() != 1)
-		            return false;
-		    }
-		    return true; 
+	private void checkValid(ArrayList<Tile> tiles) {
+		boolean isValid = true;
+		int colour = tiles.get(0).getColour();
+		int value = tiles.get(0).getValue() - 1;
+			
+		for (Tile t: tiles) {
+			//checks colours are equal
+			if(t.getColour() != colour) {
+			isValid = false;
+			break;
+			}
+		//checks values are incrementing by 1
+			if(t.getValue() - value != 1) {
+				isValid = false;
+				break;
+			}
+		value ++;
+		}
+			  
+		if(tiles.size() < 3) {
+			isValid = false;
+		}
+		  
+		this.valid = isValid; 
 	}
 
 	//GETTERS
@@ -40,6 +53,7 @@ private Boolean valid;
 	}
 
 	public boolean isValid() {
+		checkValid(this.tiles);
 		return this.valid;
 	}
 

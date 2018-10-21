@@ -9,6 +9,7 @@ public class Table implements Observable{
 private	ArrayList<Meld> Melds;
 private List<Observer> observers;
 private Pile pile;
+private boolean gameOver = false;
 
 	public Table(){
 		this.observers = new ArrayList<Observer>();
@@ -16,6 +17,7 @@ private Pile pile;
 		this.pile = new Pile();
 	}
 	//METHODS
+	//--don't really need this, I think it's just for testing.
 	public void add(Meld meld) {
 		this.Melds.add(meld);
 	}
@@ -39,9 +41,9 @@ private Pile pile;
 		}
 		
 	}
-	public void updateTable(ArrayList<Meld> updatedMelds, Pile updatedPile) {
+	public void updateTable(ArrayList<Meld> updatedMelds, boolean gameOver) {
+		this.gameOver = gameOver;
 		this.Melds = updatedMelds;
-		this.pile = updatedPile;
 		notifyObservers();
 	}
 	//GETTERS
@@ -50,6 +52,9 @@ private Pile pile;
 	}
 	public Pile getPile() {
 		return this.pile;
+	}
+	public boolean getGameOver() {
+		return this.gameOver;
 	}
 
 }

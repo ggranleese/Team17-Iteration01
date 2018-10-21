@@ -11,7 +11,7 @@ public class Player implements Observer{
 	Scanner input = new Scanner(System.in);
 	//These are observed from Table
 	private	ArrayList<Meld> Melds;
-	private Pile pile;
+	private boolean gameOver = false;
 	
 	//CONSTRUCTORS
 	public Player() {
@@ -20,10 +20,15 @@ public class Player implements Observer{
 	}
 	
 	//METHODS
-	public void drawHand() {
-		for(int i = 0; i<14; i++)
-			this.hand.add(this.pile.getPile().get(i));
+	public void drawHand(Pile pile) {
+		System.out.println("Drawing Hand...");
+		for(int i = 0; i<14; i++) {
+			drawTile(pile);
 			pile.removeTile();
+		}
+		System.out.println("Your Hand:");
+		printTiles(this.hand);
+		System.out.println("\n");
 	}
 	
 	public void removeTile(int c, int v) {
@@ -236,6 +241,10 @@ public class Player implements Observer{
 		this.hand.add(t);
 	}
 
+	public void drawTile(Pile p) {
+		this.hand.add(p.getTile(0));
+		p.removeTile();
+	}
 	
 	public ArrayList<Tile> fromHand() {
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
@@ -336,8 +345,29 @@ public class Player implements Observer{
 		return tiles;
 	}
 	
+	public boolean endTurn() {
+		ArrayList<Meld> invalidMelds = checkInvalid();
+		if(invalidMelds.isEmpty()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public ArrayList<Meld> checkInvalid(){
+		ArrayList<Meld> invalidMelds = new ArrayList<Meld>();
+		for(Meld m : this.Melds) {
+			if(!m.isValid()) {
+				invalidMelds.add(m);
+			}
+		}
+		return invalidMelds;
+	}
+	
 	//UI
 	public void doTurn() {
+		System.out.println("USER TURN");
 		System.out.println("1.Play meld from hand.");
 		System.out.println("2.Play with table.");
 		System.out.println("3.End turn.");
@@ -366,10 +396,26 @@ public class Player implements Observer{
 		}
 	}
 	private void handOptions() {
-		System.out.println("Some hand options.");	
+		System.out.println("Some hand options... (N/A)");
+		System.out.println("2.Back");
+		
+		int n = input.nextInt();
+		switch(n) {
+			case 1:
+				System.out.println("Put stuff here.");
+				break;
+			case 2: 
+				doTurn();
+				break;
+			default:
+				System.out.println("Invalid choice.");
+				handOptions();
+				break;
+		}
 	}
 	
 	private void tableOptions( ) {
+		System.out.println("TABLE OPTIONS");
 		System.out.println("1.Take tile(s) from hand.");
 		System.out.println("2.Take tile(s) from a meld.");
 		System.out.println("3.Back");
@@ -383,7 +429,7 @@ public class Player implements Observer{
 				addToMeld(fromMeld());
 				break;
 			case 3:
-				tableOptions();
+				doTurn();
 				break;
 			default:
 				System.out.println("Invalid choice.");
@@ -459,18 +505,24 @@ public class Player implements Observer{
 		printVal += "]";
 		System.out.println(printVal);
 	}
-	public boolean endTurn() {
-		return true;
 		
-	}
+	
 	//OBSERVER METHODS
 	//OBSERVER METHODS
 	public void update(Table table) {
-		this.pile = table.getPile();
-		this.Melds = table.getMelds();
+		this.Melds = (ArrayList<Meld>) table.getMelds().clone();
 	}
 	public void pushToTable(Table table) {
-		table.updateTable(this.Melds, this.pile);
+		if (this.hand.isEmpty()) {
+			this.gameOver = true;
+		}
+		if(table.getMelds().containsAll(this.Melds) && this.Melds.containsAll(table.getMelds())) {
+			System.out.println("No actions performed. Drawing Tile...");
+			drawTile(table.getPile());
+			System.out.println("New Hand:");
+			printTiles(this.hand);
+		}
+		table.updateTable(this.Melds, this.gameOver);
 	}
 	//GETTERS
 	

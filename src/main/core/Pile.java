@@ -9,13 +9,15 @@ import java.util.Random;
 public class Pile {
 
 	//MEMBERS
-private ArrayList<Tile> pile;
+public ArrayList<Tile> pile;
 	
 	//CONSTRUCTOR
 	public Pile(){
 		this.pile = new ArrayList<Tile>();
 	}
-	
+	public Pile(Pile copy){
+		this.pile = copy.getPile();
+	}
 	//METHODS
 	public void shuffle() {
 		ArrayList<Tile> tmp = new ArrayList<Tile>();

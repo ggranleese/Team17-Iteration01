@@ -12,6 +12,7 @@ public class EndOfTurnDrawTest extends TestCase{
 		Player player2 = new Player();
 		table.getPile().populate();
 		table.registerObserver(player);
+		table.registerObserver(player2);
 		table.notifyObservers();
 		
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
@@ -23,11 +24,12 @@ public class EndOfTurnDrawTest extends TestCase{
 		
 		player.playMeld(set);
 		int sizeBeforeTurn = player.getHand().size();
-		if(player2.endTurn())
-			player2.pushToTable(table);
+		if(player.endTurn())
+			player.pushToTable(table);
 		int sizeAfterTurn = player.getHand().size();
 		
 		assertTrue(sizeAfterTurn == sizeBeforeTurn);
+		
 		
 		player2.drawHand(table.getPile());
 		
@@ -35,9 +37,7 @@ public class EndOfTurnDrawTest extends TestCase{
 		if(player2.endTurn())
 			player2.pushToTable(table);
 		sizeAfterTurn = player2.getHand().size();
-		
 		assertTrue(sizeAfterTurn - sizeBeforeTurn == 1);
-	
 	}
 
 }

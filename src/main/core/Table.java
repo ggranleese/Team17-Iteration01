@@ -17,6 +17,7 @@ private boolean gameOver = false;
 		this.pile = new Pile();
 	}
 	//METHODS
+	//--don't really need this, I think it's just for testing.
 	public void add(Meld meld) {
 		this.Melds.add(meld);
 	}

@@ -236,6 +236,9 @@ public class Player implements Observer{
 		this.hand.add(t);
 	}
 
+	public void drawTile(Pile p) {
+		this.hand.add(p.getTile(0));
+	}
 	
 	public ArrayList<Tile> fromHand() {
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
@@ -489,6 +492,12 @@ public class Player implements Observer{
 	public void pushToTable(Table table) {
 		if (this.hand.isEmpty()) {
 			this.gameOver = true;
+		}
+		if(table.getMelds().containsAll(this.Melds) && this.Melds.containsAll(table.getMelds())) {
+			System.out.println("No actions performed. Drawing Tile...");
+			drawTile(table.getPile());
+			System.out.println("New Hand:");
+			printTiles(this.hand);
 		}
 		table.updateTable(this.Melds, this.gameOver);
 	}

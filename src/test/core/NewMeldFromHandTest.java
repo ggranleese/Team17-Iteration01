@@ -22,11 +22,11 @@ public class NewMeldFromHandTest extends TestCase{
 		Run run = new Run(tiles);
 		
 		player.playMeld(run);
-		player.playMeld(run);
-		
 		player.pushToTable(table);
 		
 		int initial = table.getMelds().size();
+		
+		player.drawHand(table.getPile());
 		
 		player.createNewMeld(player.fromHand());
 		player.pushToTable(table);

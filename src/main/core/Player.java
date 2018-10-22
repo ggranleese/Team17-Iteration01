@@ -396,13 +396,14 @@ public class Player implements Observer{
 		}
 	}
 	private void handOptions() {
-		System.out.println("Some hand options... (N/A)");
+		System.out.println("1.New meld from hand");
 		System.out.println("2.Back");
 		
 		int n = input.nextInt();
 		switch(n) {
 			case 1:
-				System.out.println("Put stuff here.");
+				System.out.println("Test");
+				createNewMeld(fromHand());
 				break;
 			case 2: 
 				doTurn();
@@ -414,6 +415,28 @@ public class Player implements Observer{
 		}
 	}
 	
+	public void createNewMeld(ArrayList<Tile> fromHand) {
+		System.out.println("1.Make a run");
+		System.out.println("2.Make a set");
+		System.out.println("3.Back");
+		int n = input.nextInt();
+		switch(n) {
+			case 1:
+				playMeld(new Run(fromHand));
+				break;
+			case 2: 
+				playMeld(new Set(fromHand));
+				break;
+			case 3:
+				handOptions();
+			default:
+				System.out.println("Invalid choice.");
+				handOptions();
+				break;
+		}
+		
+	}
+
 	private void tableOptions( ) {
 		System.out.println("TABLE OPTIONS");
 		System.out.println("1.Take tile(s) from hand.");

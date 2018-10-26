@@ -397,8 +397,9 @@ public class Player implements Observer{
 	}
 	private void handOptions() {
 		System.out.println("1.Make a meld only from hand");
-		System.out.println("2.Make a meld from hand and other melds combined");
-		System.out.println("3.Go back");
+		System.out.println("2.Make a meld only from other melds");
+		System.out.println("3.Make a meld from hand and other melds combined");
+		System.out.println("4.Go back");
 		
 		int n = input.nextInt();
 		switch(n) {
@@ -406,9 +407,12 @@ public class Player implements Observer{
 				createNewMeld(fromHand());
 				break;
 			case 2: 
-				createNewMeld(fromMeldandHand());
+				createNewMeld(fromMeld());
 				break;
-			case 3:
+			case 3: 
+				//createNewMeld(fromMeldAndHand());
+				break;
+			case 4:
 				doTurn();
 				break;
 			default:

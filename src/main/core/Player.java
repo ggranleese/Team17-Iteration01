@@ -396,16 +396,19 @@ public class Player implements Observer{
 		}
 	}
 	private void handOptions() {
-		System.out.println("1.New meld from hand");
-		System.out.println("2.Back");
+		System.out.println("1.Make a meld only from hand");
+		System.out.println("2.Make a meld from hand and other melds combined");
+		System.out.println("3.Go back");
 		
 		int n = input.nextInt();
 		switch(n) {
 			case 1:
-				System.out.println("Test");
 				createNewMeld(fromHand());
 				break;
 			case 2: 
+				createNewMeld(fromMeldandHand());
+				break;
+			case 3:
 				doTurn();
 				break;
 			default:
@@ -416,8 +419,8 @@ public class Player implements Observer{
 	}
 	
 	public void createNewMeld(ArrayList<Tile> fromHand) {
-		System.out.println("1.Make a run");
-		System.out.println("2.Make a set");
+		System.out.println("1.Did you make a Run?");
+		System.out.println("2.Did you make a Set?");
 		System.out.println("3.Back");
 		int n = input.nextInt();
 		switch(n) {

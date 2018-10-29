@@ -231,7 +231,7 @@ public class Player implements Observer{
 				createMeld();
 				break;
 			case 2: 
-				//modifyMeld();
+				modifyMeld();
 				break;
 			case 3: 
 				addToMeld(fromHand());
@@ -246,6 +246,16 @@ public class Player implements Observer{
 				break;
 		}
 	}
+//	
+//	public void modifyMeld() {
+//		Meld meld = selectMeld();
+//		int tileNum;
+//		System.out.println("Select tiles:");
+//		printTiles(meld.getTiles());
+//		tileNum = input.nextInt();
+//
+//		
+//	}
 	
 	public void createMeld() {
 		
@@ -255,8 +265,8 @@ public class Player implements Observer{
 		String bracket = "}";
 		while(true) {
 			System.out.println("\n" + printBuffer + bracket);
-			System.out.println("1. Use tiles from hand");
-			System.out.println("2. Use tiles from table");
+			System.out.println("1. Use tile(s) from hand");
+			System.out.println("2. Use tile(s) from table");
 			System.out.println("3. End");
 			
 			int n = input.nextInt();
@@ -303,52 +313,30 @@ public class Player implements Observer{
 	}
 	
 	
-	public void createNewMeld(ArrayList<Tile> fromHand) {
-		System.out.println("1.Did you make a Run?");
-		System.out.println("2.Did you make a Set?");
-		System.out.println("3.Back");
-		int n = input.nextInt();
-		switch(n) {
-			case 1:
-				playMeld(new Run(fromHand));
-				break;
-			case 2: 
-				playMeld(new Set(fromHand));
-				break;
-			case 3:
-				handOptions();
-			default:
-				System.out.println("Invalid choice.");
-				handOptions();
-				break;
-		}
-		
-	}
-	
-
-//	private void tableOptions( ) {
-//		System.out.println("TABLE OPTIONS");
-//		System.out.println("1.Take tile(s) from hand.");
-//		System.out.println("2.Take tile(s) from a meld.");
+//	public void createNewMeld(ArrayList<Tile> fromHand) {
+//		System.out.println("1.Did you make a Run?");
+//		System.out.println("2.Did you make a Set?");
 //		System.out.println("3.Back");
-//		
 //		int n = input.nextInt();
 //		switch(n) {
 //			case 1:
-//				addToMeld(fromHand());
+//				playMeld(new Run(fromHand));
 //				break;
 //			case 2: 
-//				addToMeld(fromMeld());
+//				playMeld(new Set(fromHand));
 //				break;
 //			case 3:
-//				doTurn();
-//				break;
+//				handOptions();
 //			default:
 //				System.out.println("Invalid choice.");
-//				tableOptions();
+//				handOptions();
 //				break;
 //		}
+//		
 //	}
+	
+
+
 	
 	public void addToMeld(ArrayList<Tile> tiles) {
 		int choice;

@@ -74,6 +74,7 @@ public class Player implements Observer{
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		int choice;
 		while(true) {
+			printTiles(tiles);
 			System.out.println("Select tile from hand:");
 			printTiles(this.hand);
 			choice = input.nextInt();
@@ -231,14 +232,9 @@ public class Player implements Observer{
 				createMeld();
 				break;
 			case 2: 
-				//modifyMeld();
+				modifyMeld();
 				break;
 			case 3: 
-
-				createNewMeld(fromMeldAndHand());
-				addToMeld(fromHand());
-				addToMeld(fromMeld());
-
 				break;
 			case 4:
 				doTurn();
@@ -350,9 +346,37 @@ public class Player implements Observer{
 		
 	}
 	
+	private void modifyMeld() {
+		Meld meld = selectMeld();
+		System.out.println("Select tiles");
+		printTiles(meld.getTiles());
+		int tileNum = input.nextInt();
+		
+		while(true) {
+			System.out.println("1.Use tile(s) from hand.");
+			System.out.println("2.Use tile(s) form a meld");
+			System.out.println("3.Back");
+			
+			int n = input.nextInt();
+			switch(n) {
+			case 1:
+				addToMeld(fromHand());
+				break;
+			case 2:
+				fromMeld();
+			case 3:
+				doTurn();
+				break;
+			default:
+				System.out.println("Invalid choice");
+				break;
+			}
+		}
+	}
+	
 	
 
-	public void createNewMeld(ArrayList<Tile> fromHand) {
+/*	public void createNewMeld(ArrayList<Tile> fromHand) {
 		System.out.println("1.Did you make a Run?");
 		System.out.println("2.Did you make a Set?");
 		System.out.println("3.Back");
@@ -372,7 +396,7 @@ public class Player implements Observer{
 				break;
 		}
 		
-	}
+	}*/
 	
 
 //	private void tableOptions( ) {

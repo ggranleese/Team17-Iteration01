@@ -43,6 +43,67 @@ public class Player implements Observer{
 		}
 	}
 	
+	public void sortHand() {
+		ArrayList<Tile> blue = new ArrayList<Tile>();
+		ArrayList<Tile> red = new ArrayList<Tile>();
+		ArrayList<Tile> green = new ArrayList<Tile>();
+		ArrayList<Tile> orange = new ArrayList<Tile>();
+		ArrayList<Tile> finished = new ArrayList<Tile>();
+		
+		for(int i = 0; i < this.hand.size(); i++) {
+			
+			if(this.hand.get(i).getColour() == 1) {
+				blue.add(this.hand.get(i));
+			}
+			
+			if(this.hand.get(i).getColour() == 2) {
+				red.add(this.hand.get(i));
+			}
+			
+			if(this.hand.get(i).getColour() == 3) {
+				green.add(this.hand.get(i));
+			}
+			
+			if(this.hand.get(i).getColour() == 4) {
+				orange.add(this.hand.get(i));
+			}
+			
+		}
+		
+		insertionSort(blue);
+		insertionSort(red);
+		insertionSort(green);
+		insertionSort(orange);
+		
+		finished.addAll(blue);
+		finished.addAll(red);
+		finished.addAll(green);
+		finished.addAll(orange);
+		
+		this.hand = finished;
+		
+	}
+	
+	public ArrayList<Tile> insertionSort(ArrayList<Tile> input) {
+		for(int i =1; i < input.size(); i++) {
+			for(int j = i; j > 0; j--) {
+				if(input.get(j).getValue() < input.get(j-1).getValue()) {
+					Tile temp = input.get(j);
+					Tile x = input.get(j);
+					Tile y = input.get(j-1);
+					x = y;
+					y = temp;
+					
+				}
+			}	
+		}
+		return input;
+	}
+	
+	
+
+	
+	
 	public void playMeld(Meld m) {
 		
 		this.Melds.add(m);
@@ -385,11 +446,11 @@ public class Player implements Observer{
 	}
 	
 	
-<<<<<<< HEAD
+
 //	public void createNewMeld(ArrayList<Tile> fromHand) {
 //		System.out.println("1.Did you make a Run?");
 //		System.out.println("2.Did you make a Set?");
-=======
+
 
 /*	public void createNewMeld(ArrayList<Tile> fromHand) {
 		System.out.println("1.Did you make a Run?");
@@ -418,7 +479,7 @@ public class Player implements Observer{
 //		System.out.println("TABLE OPTIONS");
 //		System.out.println("1.Take tile(s) from hand.");
 //		System.out.println("2.Take tile(s) from a meld.");
->>>>>>> 61c0fdb1639f51120836e6039519b6d420c12676
+
 //		System.out.println("3.Back");
 //		int n = input.nextInt();
 //		switch(n) {

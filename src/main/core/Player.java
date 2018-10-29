@@ -43,182 +43,67 @@ public class Player implements Observer{
 		}
 	}
 	
-	/*
-	public String toString() {
-		String output = "";
-		for(int i=0; i<this.getSize(); i++){
-			if(this.getTile(i).getColour() == 1) {
-				if(this.getTile(i).getValue() == 1) {
-					output += ("B1");
-					
-				}else if(this.getTile(i).getValue() == 2) {
-					output += ("B2");
-					
-				}else if(this.getTile(i).getValue() == 3) {
-					output += ("B3");
-					
-				}else if(this.getTile(i).getValue() == 4) {
-					output += ("B4");
-					
-				}else if(this.getTile(i).getValue() == 5) {
-					output += ("B5");
-					
-				}else if(this.getTile(i).getValue() == 6) {
-					output += ("B6");
-					
-				}else if(this.getTile(i).getValue() == 7) {
-					output += ("B7");
-					
-				}else if(this.getTile(i).getValue() == 8) {
-					output += ("B8");
-					
-				}else if(this.getTile(i).getValue() == 9) {
-					output += ("B9");
-					
-				}else if(this.getTile(i).getValue() == 10) {
-					output += ("B10");
-					
-				}else if(this.getTile(i).getValue() == 11) {
-					output += ("B11");
-					
-				}else if(this.getTile(i).getValue() == 12) {
-					output += ("B12");
-					
-				}else if(this.getTile(i).getValue() == 13) {
-					output += ("B13");
-					
-				}
-			}else if(this.getTile(i).getColour() == 2) {
-				
-				if(this.getTile(i).getValue() == 1) {
-					output += ("R1");
-					
-				}else if(this.getTile(i).getValue() == 2) {
-					output += ("R2");
-					
-				}else if(this.getTile(i).getValue() == 3) {
-					output += ("R3");
-					
-				}else if(this.getTile(i).getValue() == 4) {
-					output += ("R4");
-					
-				}else if(this.getTile(i).getValue() == 5) {
-					output += ("R5");
-					
-				}else if(this.getTile(i).getValue() == 6) {
-					output += ("R6");
-					
-				}else if(this.getTile(i).getValue() == 7) {
-					output += ("R7");
-					
-				}else if(this.getTile(i).getValue() == 8) {
-					output += ("R8");
-					
-				}else if(this.getTile(i).getValue() == 9) {
-					output += ("R9");
-					
-				}else if(this.getTile(i).getValue() == 10) {
-					output += ("R10");
-					
-				}else if(this.getTile(i).getValue() == 11) {
-					output += ("R11");
-					
-				}else if(this.getTile(i).getValue() == 12) {
-					output += ("R12");
-					
-				}else if(this.getTile(i).getValue() == 13) {
-					output += ("R13");
-					
-				}
-			}else if(this.getTile(i).getColour() == 3) {
-				
-				if(this.getTile(i).getValue() == 1) {
-					output += ("G1");
-					
-				}else if(this.getTile(i).getValue() == 2) {
-					output += ("G2");
-					
-				}else if(this.getTile(i).getValue() == 3) {
-					output += ("G3");
-					
-				}else if(this.getTile(i).getValue() == 4) {
-					output += ("G4");
-					
-				}else if(this.getTile(i).getValue() == 5) {
-					output += ("G5");
-					
-				}else if(this.getTile(i).getValue() == 6) {
-					output += ("G6");
-					
-				}else if(this.getTile(i).getValue() == 7) {
-					output += ("G7");
-					
-				}else if(this.getTile(i).getValue() == 8) {
-					output += ("G8");
-					
-				}else if(this.getTile(i).getValue() == 9) {
-					output += ("G9");
-					
-				}else if(this.getTile(i).getValue() == 10) {
-					output += ("G10");
-					
-				}else if(this.getTile(i).getValue() == 11) {
-					output += ("G11");
-					
-				}else if(this.getTile(i).getValue() == 12) {
-					output += ("G12");
-					
-				}else if(this.getTile(i).getValue() == 13) {
-					output += ("G13");
-					
-				}
-			}else{
-				
-				if(this.getTile(i).getValue() == 1) {
-					output += ("O1");
-					
-				}else if(this.getTile(i).getValue() == 2) {
-					output += ("O2");
-					
-				}else if(this.getTile(i).getValue() == 3) {
-					output += ("O3");
-					
-				}else if(this.getTile(i).getValue() == 4) {
-					output += ("O4");
-					
-				}else if(this.getTile(i).getValue() == 5) {
-					output += ("O5");
-					
-				}else if(this.getTile(i).getValue() == 6) {
-					output += ("O6");
-					
-				}else if(this.getTile(i).getValue() == 7) {
-					output += ("O7");
-					
-				}else if(this.getTile(i).getValue() == 8) {
-					output += ("O8");
-					
-				}else if(this.getTile(i).getValue() == 9) {
-					output += ("O9");
-					
-				}else if(this.getTile(i).getValue() == 10) {
-					output += ("O10");
-					
-				}else if(this.getTile(i).getValue() == 11) {
-					output += ("O11");
-					
-				}else if(this.getTile(i).getValue() == 12) {
-					output += ("O12");
-					
-				}else if(this.getTile(i).getValue() == 13) {
-					output += ("O13");
-					
-				}
+	public void sortHand() {
+		ArrayList<Tile> blue = new ArrayList<Tile>();
+		ArrayList<Tile> red = new ArrayList<Tile>();
+		ArrayList<Tile> green = new ArrayList<Tile>();
+		ArrayList<Tile> orange = new ArrayList<Tile>();
+		ArrayList<Tile> finished = new ArrayList<Tile>();
+		
+		for(int i = 0; i < this.hand.size(); i++) {
+			
+			if(this.hand.get(i).getColour() == 1) {
+				blue.add(this.hand.get(i));
 			}
+			
+			if(this.hand.get(i).getColour() == 2) {
+				red.add(this.hand.get(i));
+			}
+			
+			if(this.hand.get(i).getColour() == 3) {
+				green.add(this.hand.get(i));
+			}
+			
+			if(this.hand.get(i).getColour() == 4) {
+				orange.add(this.hand.get(i));
+			}
+			
 		}
-		return (output);
+		
+		insertionSort(blue);
+		insertionSort(red);
+		insertionSort(green);
+		insertionSort(orange);
+		
+		finished.addAll(blue);
+		finished.addAll(red);
+		finished.addAll(green);
+		finished.addAll(orange);
+		
+		this.hand = finished;
+		
 	}
-*/
+	
+	public ArrayList<Tile> insertionSort(ArrayList<Tile> input) {
+		for(int i =1; i < input.size(); i++) {
+			for(int j = i; j > 0; j--) {
+				if(input.get(j).getValue() < input.get(j-1).getValue()) {
+					Tile temp = input.get(j);
+					Tile x = input.get(j);
+					Tile y = input.get(j-1);
+					x = y;
+					y = temp;
+					
+				}
+			}	
+		}
+		return input;
+	}
+	
+	
+
+	
+	
 	public void playMeld(Meld m) {
 		
 		this.Melds.add(m);
@@ -250,6 +135,7 @@ public class Player implements Observer{
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		int choice;
 		while(true) {
+			printTiles(tiles);
 			System.out.println("Select tile from hand:");
 			printTiles(this.hand);
 			choice = input.nextInt();
@@ -287,6 +173,7 @@ public class Player implements Observer{
 	}
 	
 	public ArrayList<Tile> fromMeld(){
+		
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		Meld meld;
 		int tileNum;
@@ -368,25 +255,24 @@ public class Player implements Observer{
 	//UI
 	public void doTurn() {
 		System.out.println("USER TURN");
-		System.out.println("1.Play meld from hand.");
-		System.out.println("2.Play with table.");
-		System.out.println("3.End turn.");
+		System.out.println("1.Play tiles.");
+		System.out.println("2.Draw tile & end turn.");
 		int n = input.nextInt();
 		switch(n) {
 			case 1: 
-				handOptions();
+				playOptions();
 				break;
-			case 2: 
-				if (this.status == false) {
-					System.out.println("Must have 30 or more points to do this.");
-					doTurn();
-					break;
-				}
-				else {
-					tableOptions();
-					break;
-				}
-			case 3:
+//			case 2: 
+//				if (this.status == false) {
+//					System.out.println("Must have 30 or more points to do this.");
+//					doTurn();
+//					break;
+//				}
+//				else {
+//					tableOptions();
+//					break;
+//				}
+			case 2:
 				endTurn();
 				break;
 			default:
@@ -395,29 +281,180 @@ public class Player implements Observer{
 				break;
 		}
 	}
-	private void handOptions() {
-		System.out.println("1.New meld from hand");
-		System.out.println("2.Back");
+	private void playOptions() {
+		printTiles(hand);
+		System.out.println("1.Create Meld");
+		System.out.println("2.Modity Meld");
+		System.out.println("3.End Turn");
 		
 		int n = input.nextInt();
 		switch(n) {
 			case 1:
-				System.out.println("Test");
-				createNewMeld(fromHand());
+				createMeld();
 				break;
 			case 2: 
+				modifyMeld();
+				break;
+			case 3: 
+				break;
+			case 4:
 				doTurn();
 				break;
 			default:
 				System.out.println("Invalid choice.");
-				handOptions();
+				playOptions();
 				break;
 		}
 	}
+//	
+//	public void modifyMeld() {
+//		Meld meld = selectMeld();
+//		int tileNum;
+//		System.out.println("Select tiles:");
+//		printTiles(meld.getTiles());
+//		tileNum = input.nextInt();
+//
+//		
+//	}
 	
-	public void createNewMeld(ArrayList<Tile> fromHand) {
-		System.out.println("1.Make a run");
-		System.out.println("2.Make a set");
+
+	public ArrayList<Tile> fromMeldAndHand(){
+		 ArrayList<Tile> tiles = new ArrayList<Tile>();
+		 
+		 
+		 while(true) {
+			 System.out.println("1.Choose tiles from Hand");
+			 System.out.println("2.Choose tiles from Melds");
+			 System.out.println("3.Done");
+			 System.out.println("4.Back");
+			 int n = input.nextInt();
+			 
+			 if(n == 1) {
+				 
+				 System.out.println("Select tile from hand:");
+				 printTiles(this.hand);
+				 int choice = input.nextInt();
+				 
+				 
+				 
+			 }
+			 
+			 if(n == 2) {
+				 
+			 }
+			 
+			 if(n == 3) {
+				 
+			 }
+			 
+			 if(n == 4){
+				 
+			 }
+			 
+			 else {
+				 System.out.println("Invalid.");
+			 }
+			  
+		 }
+			 
+		 
+		
+	}
+	
+
+	public void createMeld() {
+		
+		ArrayList<Tile> buffer = new ArrayList<Tile>();
+		ArrayList<Tile> tmp = new ArrayList<Tile>();
+		String printBuffer = "{ ";
+		String bracket = "}";
+		while(true) {
+			System.out.println("\n" + printBuffer + bracket);
+			System.out.println("1. Use tile(s) from hand");
+			System.out.println("2. Use tile(s) from table");
+			System.out.println("3. End");
+			
+			int n = input.nextInt();
+			switch(n) {
+			case 1:
+				tmp = fromHand();
+				buffer.addAll(tmp);
+				for (Tile t: tmp) {
+					printBuffer += ("*" + t.toString() + " ");
+				}
+				continue;
+			case 2:
+				if (this.status == false) {
+					System.out.println("Must have 30 or more points to do this.");
+					continue;
+				}
+				
+				tmp = fromMeld();
+				buffer.addAll(tmp);
+				for(Tile t: tmp) {
+					printBuffer += ("!" + t.toString() + " ");
+				}
+				continue;
+			case 3:
+				Run testRun = new Run(buffer);
+				Set testSet = new Set(buffer);
+				
+				if(testRun.isValid()) {
+					playMeld(testRun);
+				}else if(testSet.isValid()) {
+					playMeld(testSet);
+				}else {
+					System.out.println("INVAID MELD");
+					break;
+				}
+				
+			default:
+				System.out.println("Invalid choice.");
+				
+			}
+			break;
+		}
+		
+	}
+	
+	private void modifyMeld() {
+		Meld meld = selectMeld();
+		System.out.println("Select tiles");
+		printTiles(meld.getTiles());
+		int tileNum = input.nextInt();
+		
+		while(true) {
+			System.out.println("1.Use tile(s) from hand.");
+			System.out.println("2.Use tile(s) form a meld");
+			System.out.println("3.Back");
+			
+			int n = input.nextInt();
+			switch(n) {
+			case 1:
+				addToMeld(fromHand());
+				break;
+			case 2:
+				fromMeld();
+			case 3:
+				doTurn();
+				break;
+			default:
+				System.out.println("Invalid choice");
+				break;
+			}
+		}
+	}
+	
+	
+
+//	public void createNewMeld(ArrayList<Tile> fromHand) {
+//		System.out.println("1.Did you make a Run?");
+//		System.out.println("2.Did you make a Set?");
+
+
+/*	public void createNewMeld(ArrayList<Tile> fromHand) {
+		System.out.println("1.Did you make a Run?");
+		System.out.println("2.Did you make a Set?");
 		System.out.println("3.Back");
 		int n = input.nextInt();
 		switch(n) {
@@ -435,31 +472,35 @@ public class Player implements Observer{
 				break;
 		}
 		
-	}
+	}*/
+	
 
-	private void tableOptions( ) {
-		System.out.println("TABLE OPTIONS");
-		System.out.println("1.Take tile(s) from hand.");
-		System.out.println("2.Take tile(s) from a meld.");
-		System.out.println("3.Back");
-		
-		int n = input.nextInt();
-		switch(n) {
-			case 1:
-				addToMeld(fromHand());
-				break;
-			case 2: 
-				addToMeld(fromMeld());
-				break;
-			case 3:
-				doTurn();
-				break;
-			default:
-				System.out.println("Invalid choice.");
-				tableOptions();
-				break;
-		}
-	}
+//	private void tableOptions( ) {
+//		System.out.println("TABLE OPTIONS");
+//		System.out.println("1.Take tile(s) from hand.");
+//		System.out.println("2.Take tile(s) from a meld.");
+
+//		System.out.println("3.Back");
+//		int n = input.nextInt();
+//		switch(n) {
+//			case 1:
+//				playMeld(new Run(fromHand));
+//				break;
+//			case 2: 
+//				playMeld(new Set(fromHand));
+//				break;
+//			case 3:
+//				handOptions();
+//			default:
+//				System.out.println("Invalid choice.");
+//				handOptions();
+//				break;
+//		}
+//		
+//	}
+	
+
+
 	
 	public void addToMeld(ArrayList<Tile> tiles) {
 		int choice;
@@ -521,11 +562,13 @@ public class Player implements Observer{
 	}
 	
 	private void printTiles(ArrayList<Tile> tiles) {
-		String printVal = "[ ";
+		String printVal = "{ ";
+		int counter = 1;
 		for (Tile t : tiles) {
-			printVal += t.toString() + " ";
+			printVal += counter + "-" + t.toString() + " ";
+			counter++;
 		}
-		printVal += "]";
+		printVal += "}";
 		System.out.println(printVal);
 	}
 		

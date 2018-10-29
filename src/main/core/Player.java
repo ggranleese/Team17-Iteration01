@@ -234,12 +234,11 @@ public class Player implements Observer{
 				//modifyMeld();
 				break;
 			case 3: 
-<<<<<<< HEAD
+
 				createNewMeld(fromMeldAndHand());
-=======
 				addToMeld(fromHand());
 				addToMeld(fromMeld());
->>>>>>> 57db9cd1fc636724b52bad39771c1b72041efebb
+
 				break;
 			case 4:
 				doTurn();
@@ -251,7 +250,7 @@ public class Player implements Observer{
 		}
 	}
 	
-<<<<<<< HEAD
+
 	public ArrayList<Tile> fromMeldAndHand(){
 		 ArrayList<Tile> tiles = new ArrayList<Tile>();
 		 
@@ -295,7 +294,7 @@ public class Player implements Observer{
 		
 	}
 	
-=======
+
 	public void createMeld() {
 		
 		ArrayList<Tile> buffer = new ArrayList<Tile>();
@@ -352,7 +351,7 @@ public class Player implements Observer{
 	}
 	
 	
->>>>>>> 57db9cd1fc636724b52bad39771c1b72041efebb
+
 	public void createNewMeld(ArrayList<Tile> fromHand) {
 		System.out.println("1.Did you make a Run?");
 		System.out.println("2.Did you make a Set?");
@@ -461,8 +460,10 @@ public class Player implements Observer{
 	
 	private void printTiles(ArrayList<Tile> tiles) {
 		String printVal = "{ ";
+		int counter = 1;
 		for (Tile t : tiles) {
-			printVal += t.toString() + " ";
+			printVal += counter + "-" + t.toString() + " ";
+			counter++;
 		}
 		printVal += "}";
 		System.out.println(printVal);

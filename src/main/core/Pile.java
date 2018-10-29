@@ -44,7 +44,7 @@ public ArrayList<Tile> pile;
 	public void populate() {
 		
 		for(int x=0; x<2; x++){
-			for(int i=1; i<4; i++) {
+			for(int i=1; i<5; i++) {
 				for(int j=1; j<=13; j++) {
 					this.pile.add(new Tile(i,j));
 				}

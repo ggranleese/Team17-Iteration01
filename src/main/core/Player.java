@@ -410,7 +410,7 @@ public class Player implements Observer{
 				createNewMeld(fromMeld());
 				break;
 			case 3: 
-				//createNewMeld(fromMeldAndHand());
+				createNewMeld(fromMeldAndHand());
 				break;
 			case 4:
 				doTurn();
@@ -420,6 +420,49 @@ public class Player implements Observer{
 				handOptions();
 				break;
 		}
+	}
+	
+	public ArrayList<Tile> fromMeldAndHand(){
+		 ArrayList<Tile> tiles = new ArrayList<Tile>();
+		 
+		 
+		 while(true) {
+			 System.out.println("1.Choose tiles from Hand");
+			 System.out.println("2.Choose tiles from Melds");
+			 System.out.println("3.Done");
+			 System.out.println("4.Back");
+			 int n = input.nextInt();
+			 
+			 if(n == 1) {
+				 
+				 System.out.println("Select tile from hand:");
+				 printTiles(this.hand);
+				 int choice = input.nextInt();
+				 
+				 
+				 
+			 }
+			 
+			 if(n == 2) {
+				 
+			 }
+			 
+			 if(n == 3) {
+				 
+			 }
+			 
+			 if(n == 4){
+				 
+			 }
+			 
+			 else {
+				 System.out.println("Invalid.");
+			 }
+			  
+		 }
+			 
+		 
+		
 	}
 	
 	public void createNewMeld(ArrayList<Tile> fromHand) {

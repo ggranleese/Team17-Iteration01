@@ -198,7 +198,7 @@ public class Player implements Observer{
 		int n = input.nextInt();
 		switch(n) {
 			case 1: 
-				handOptions();
+				playOptions();
 				break;
 //			case 2: 
 //				if (this.status == false) {
@@ -219,7 +219,7 @@ public class Player implements Observer{
 				break;
 		}
 	}
-	private void handOptions() {
+	private void playOptions() {
 		printTiles(hand);
 		System.out.println("1.Create Meld");
 		System.out.println("2.Modity Meld");
@@ -242,7 +242,7 @@ public class Player implements Observer{
 				break;
 			default:
 				System.out.println("Invalid choice.");
-				handOptions();
+				playOptions();
 				break;
 		}
 	}
@@ -250,7 +250,11 @@ public class Player implements Observer{
 	public void createMeld() {
 		
 		ArrayList<Tile> buffer = new ArrayList<Tile>();
+		ArrayList<Tile> tmp = new ArrayList<Tile>();
+		String printBuffer = "{ ";
+		String bracket = "}";
 		while(true) {
+			System.out.println("\n" + printBuffer + bracket);
 			System.out.println("1. Use tiles from hand");
 			System.out.println("2. Use tiles from table");
 			System.out.println("3. End");
@@ -258,13 +262,25 @@ public class Player implements Observer{
 			int n = input.nextInt();
 			switch(n) {
 			case 1:
-				buffer.addAll(fromHand());
+				tmp = fromHand();
+				buffer.addAll(tmp);
+				for (Tile t: tmp) {
+					printBuffer += ("*" + t.toString() + " ");
+				}
 				continue;
 			case 2:
-				buffer.addAll(fromMeld());
+				if (this.status == false) {
+					System.out.println("Must have 30 or more points to do this.");
+					continue;
+				}
+				
+				tmp = fromMeld();
+				buffer.addAll(tmp);
+				for(Tile t: tmp) {
+					printBuffer += ("!" + t.toString() + " ");
+				}
 				continue;
 			case 3:
-			
 				Run testRun = new Run(buffer);
 				Set testSet = new Set(buffer);
 				

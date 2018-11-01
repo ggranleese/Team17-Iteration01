@@ -6,15 +6,23 @@ public class AI extends Player{
 	//MEMBERS
 private ArrayList<Tile> hand;
 private Boolean status;
-private Integer strategy;
+private IStrategy strategy;
 
 	//CONSTRUCTORS
 	public AI(int strat) {
 		this.hand = new ArrayList<Tile>();
-		this.strategy = strat;
+		
+		if(strat == 1) {
+			this.strategy = new StrategyOne();
+		}else if(strat == 2){
+			this.strategy = new StrategyTwo();
+		}else{
+			this.strategy = new StrategyThree();
+		}
 	}
 	
 	//METHODS
+	@Override
 	public void doTurn() {
 		System.out.println("Im a bot");
 	}

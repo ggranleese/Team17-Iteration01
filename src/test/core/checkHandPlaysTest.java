@@ -33,5 +33,8 @@ public class checkHandPlaysTest extends TestCase {
 		
 		assertTrue(bot.checkHandPlays().get(0) == set);
 		assertTrue(bot.checkHandPlays().get(1) == run);
+
+
+		
 	}
 }

@@ -7,7 +7,7 @@ public class Player implements Observer{
 	//MEMBERS
 	private Boolean status;
 	private int pointCounter;
-	private ArrayList<Tile> hand;
+	public ArrayList<Tile> hand;
 	Scanner input = new Scanner(System.in);
 	//These are observed from Table
 	private	ArrayList<Meld> Melds;

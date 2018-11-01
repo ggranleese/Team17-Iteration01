@@ -27,6 +27,18 @@ private IStrategy strategy;
 		System.out.println("Im a bot");
 	}
 	
+	public ArrayList<Meld> checkHandPlays(){
+		
+	}
+	
+	public ArrayList<Run> checkRun(){
+		
+	}
+	
+	public ArrayList<Set> checkSet(){
+		
+	}
+	
 	//GETTERS
 	
 }

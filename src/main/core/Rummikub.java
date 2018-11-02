@@ -97,9 +97,16 @@ public class Rummikub {
 	//Makes Players
 	private static Player[] playInOrder(int[] numArray) {
 		int n = numArray.length;
+		int counter = 1;
 		Player[] playerArray = new Player[n];
 		for(int i=0; i<n;i++) {
-			playerArray[numArray[i]] = new Player(); 
+			if(i==1) {
+				playerArray[numArray[i]] = new Player(); 
+			}else {
+				playerArray[numArray[i]] = new AI(counter);
+				counter++;
+			}
+				
 		}
 		
 		return playerArray;

@@ -1,6 +1,8 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
 public class AI extends Player{
 	//MEMBERS
@@ -24,9 +26,23 @@ private IStrategy strategy;
 	//METHODS
 	@Override
 	public void doTurn() {
-		System.out.println("Im a bot");
-		//strategy.play(checkHandPlays);
+		ArrayList<Meld> whatToPlay;
+		whatToPlay = strategy.play(this.hand);
+		for(Meld m : whatToPlay) {
+			playMeld(m);
+			for(int i = 0; i > m.getTiles().size();i++) {
+				removeTile(m.getTiles().get(i).getColour(), m.getTiles().get(i).getValue());
+			}	
+		}
 	}
+	
+	
+	
+	
+
+		
+		//strategy.play(checkHandPlays);
+	
 	
 	public ArrayList<Meld> checkHandPlays(){
 		ArrayList<Meld> possiblePlays = new ArrayList<Meld>();
@@ -126,6 +142,7 @@ private IStrategy strategy;
 		
 		return colour;
 	}
+
 	
 	//GETTERS
 	

@@ -41,7 +41,7 @@ public class Rummikub {
 		table.notifyObservers();
 		table.getPile().populate();
 		table.getPile().shuffle();
-		
+		System.out.println(table.getPile().getPile().size());
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		tiles.add(new Tile(1,10));
 		tiles.add(new Tile(2,10));

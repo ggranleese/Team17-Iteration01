@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class AI extends Player{
 	//MEMBERS
 private IStrategy strategy;
-
+private int stratNum;
 
 	//CONSTRUCTORS
 	public AI(int strat) {
 		this.hand = new ArrayList<Tile>();
-		
+		this.stratNum = strat;
 		if(strat == 1) {
 			this.strategy = new StrategyOne();
 		}else if(strat == 2){
@@ -28,7 +28,8 @@ private IStrategy strategy;
 	}
 	
 	public void doTurn(Table table) {
-		System.out.println("BOT TURN");
+
+		System.out.println("BOT " + this.stratNum+ " TURN");
 		ArrayList<Meld> whatToPlay;
 //		whatToPlay = strategy.play(this.hand, table);
 //		for(Meld m : whatToPlay) {

@@ -1,47 +1,32 @@
 package core;
 
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Rummikub {
 	public static void main(String[] args) {
-		Player[] players = null;
 		
 		//Start the Game
 		System.out.println("hey man welcome to Rummikub");
-		int bots;
-		while(true) {
-			Scanner numBots = new Scanner(System.in);
-			int n = promptNumBotChoice(numBots);
-			if (n > 3 || n < 1) {
-				System.out.println("Invalid choice. Please select between 1 and 3 bots.");
-			}
-			else {
-				bots = n;
-				break;
-			}
-		}
-		
-		//I have no idea how your player turn methods work pls do
-		int PlayerOrder[] = playerOrder(bots + 1);
-		startDraw(PlayerOrder);
-		Player Player[] = playInOrder(PlayerOrder);
 		
 		//-------------------------------------------------------------
 		//FOR TESTING ONLY
 		Table table = new Table();
 		Player player = new Player();
-		Player player2 = new Player();
-		Player bot = new AI(2);
+		Player bot1 = new AI(1);
+		Player bot2 = new AI(2);
+		Player bot3 = new AI(3);
 		
 		table.registerObserver(player);
-		table.registerObserver(player2);
-		table.registerObserver(bot);
-		table.notifyObservers();
+		table.registerObserver(bot1);
+		table.registerObserver(bot2);
+		table.registerObserver(bot3);
+		
 		table.getPile().populate();
 		table.getPile().shuffle();
-		System.out.println(table.getPile().getPile().size());
+		
+		table.notifyObservers();
+		
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		tiles.add(new Tile(1,10));
 		tiles.add(new Tile(2,10));
@@ -66,66 +51,36 @@ public class Rummikub {
 		//player.playMeld(run2);
 		//player.playMeld(set);
 		
-		player.drawHand(table.getPile());
-		
-		player.doTurn();
-		if(player.endTurn()) {
-			player.pushToTable(table);
-		}
-		else {
-			System.out.println("Invalid melds played bro\n");
-		}
-	
-		player2.drawHand(table.getPile());
-		player2.doTurn();
-		if(player2.endTurn())
-			player2.pushToTable(table);
-		
-		((AI)bot).doTurn(table);
+		player.drawHand();
+		bot1.drawHand();
+		bot2.drawHand();
+		bot3.drawHand();
 		
 		
-	}
-
-	//Player Order guide
-	private static int[] playerOrder(int n) {
-		int PossibleDraws[] = new int[n];
-		for(int i = 0; i > n; i++) {
-			PossibleDraws[i] = i+1;
-		}
-		startDraw(PossibleDraws);
-		return (PossibleDraws);
-	}
-	
-	//Makes Players
-	private static Player[] playInOrder(int[] numArray) {
-		int n = numArray.length;
-		int counter = 1;
-		Player[] playerArray = new Player[n];
-		for(int i=0; i<n;i++) {
-			if(i==1) {
-				playerArray[numArray[i]] = new Player(); 
-			}else {
-				playerArray[numArray[i]] = new AI(counter);
-				counter++;
+		while(table.getGameOver() == false) {
+			
+			player.doTurn();
+			if(player.endTurn()) {
+				player.pushToTable(table);
 			}
-				
+			else {
+				System.out.println("Invalid melds played.\n");
+			}
+	
+			
+			((AI)bot1).doTurn(table);
+			bot1.pushToTable(table);
+			
+			((AI)bot2).doTurn(table);
+			bot2.pushToTable(table);
+			
+			((AI)bot3).doTurn(table);
+			bot3.getHand().clear();
+			bot3.pushToTable(table);
 		}
+		System.out.println("Ganme Over.");
+	}
 		
-		return playerArray;
-	}
-
-	//Puts players in correct order.
-	static void startDraw(int[] turnOrder) {
-		Random rnd = ThreadLocalRandom.current();
-		    for (int i = turnOrder.length - 1; i > 0; i--)
-		    {
-		      int index = rnd.nextInt(i + 1);
-		      // Simple swap
-		      int a = turnOrder[index];
-		      turnOrder[index] = turnOrder[i];
-		      turnOrder[i] = a;
-		    }
-	}
 	
 	public static int promptNumBotChoice(Scanner sc) {
 	

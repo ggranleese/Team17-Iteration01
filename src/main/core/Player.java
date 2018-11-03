@@ -10,7 +10,8 @@ public class Player implements Observer{
 	public ArrayList<Tile> hand;
 	Scanner input = new Scanner(System.in);
 	//These are observed from Table
-	private	ArrayList<Meld> Melds;
+	private Table tableSnapshot = new Table();
+	//private	ArrayList<Meld> Melds;
 	private boolean gameOver = false;
 	
 	//CONSTRUCTORS
@@ -106,7 +107,7 @@ public class Player implements Observer{
 	
 	public void playMeld(Meld m) {
 		
-		this.Melds.add(m);
+		this.tableSnapshot.getMelds().add(m);
 	
 		if(this.status == false) {
 			int meldPoints = 0;
@@ -181,7 +182,7 @@ public class Player implements Observer{
 		while(true) {
 			if(meld.getTiles().isEmpty()) {
 				System.out.println("This meld is empty!");
-				this.Melds.remove(meld);
+				this.tableSnapshot.getMelds().remove(meld);
 				break;
 			}
 			System.out.println("Select tiles:");
@@ -244,7 +245,7 @@ public class Player implements Observer{
 	
 	public ArrayList<Meld> checkInvalid(){
 		ArrayList<Meld> invalidMelds = new ArrayList<Meld>();
-		for(Meld m : this.Melds) {
+		for(Meld m : this.tableSnapshot.getMelds()) {
 			if(!m.isValid()) {
 				invalidMelds.add(m);
 			}
@@ -447,63 +448,6 @@ public class Player implements Observer{
 		}
 	}
 	
-	
-
-//	public void createNewMeld(ArrayList<Tile> fromHand) {
-//		System.out.println("1.Did you make a Run?");
-//		System.out.println("2.Did you make a Set?");
-
-
-/*	public void createNewMeld(ArrayList<Tile> fromHand) {
-		System.out.println("1.Did you make a Run?");
-		System.out.println("2.Did you make a Set?");
-		System.out.println("3.Back");
-		int n = input.nextInt();
-		switch(n) {
-			case 1:
-				playMeld(new Run(fromHand));
-				break;
-			case 2: 
-				playMeld(new Set(fromHand));
-				break;
-			case 3:
-				handOptions();
-			default:
-				System.out.println("Invalid choice.");
-				handOptions();
-				break;
-		}
-		
-	}*/
-	
-
-//	private void tableOptions( ) {
-//		System.out.println("TABLE OPTIONS");
-//		System.out.println("1.Take tile(s) from hand.");
-//		System.out.println("2.Take tile(s) from a meld.");
-
-//		System.out.println("3.Back");
-//		int n = input.nextInt();
-//		switch(n) {
-//			case 1:
-//				playMeld(new Run(fromHand));
-//				break;
-//			case 2: 
-//				playMeld(new Set(fromHand));
-//				break;
-//			case 3:
-//				handOptions();
-//			default:
-//				System.out.println("Invalid choice.");
-//				handOptions();
-//				break;
-//		}
-//		
-//	}
-	
-
-
-	
 	public void addToMeld(ArrayList<Tile> tiles) {
 		int choice;
 		Meld meld;
@@ -513,7 +457,7 @@ public class Player implements Observer{
 			displayMelds();
 			choice = input.nextInt();
 			try {
-				meld = Melds.get(choice -1);
+				meld = this.tableSnapshot.getMelds().get(choice -1);
 				break;
 			}catch (Exception e){
 				System.out.println("Invalid.");
@@ -523,7 +467,7 @@ public class Player implements Observer{
 		while(!tiles.isEmpty()) {
 			while(true) {
 				System.out.println("Select position you'd like to add ["+ tiles.get(0).toString()+"] to:");
-				printTiles(Melds.get(choice -1).getTiles());
+				printTiles(this.tableSnapshot.getMelds().get(choice -1).getTiles());
 				int position = input.nextInt();
 				try {
 				meld.getTiles().add(position -1,tiles.get(0));
@@ -550,7 +494,7 @@ public class Player implements Observer{
 			displayMelds();
 			meldNum = input.nextInt();
 			try {
-				return Melds.get(meldNum -1);
+				return this.tableSnapshot.getMelds().get(meldNum -1);
 			}catch (Exception e){
 				System.out.println("Invalid.");
 				continue;
@@ -558,7 +502,7 @@ public class Player implements Observer{
 		}
 	}
 	private void displayMelds() {
-		for(Meld m : this.Melds) {
+		for(Meld m : this.tableSnapshot.getMelds()) {
             printTiles(m.getTiles());
         }
 	}
@@ -576,19 +520,20 @@ public class Player implements Observer{
 	
 	//OBSERVER METHODS
 	public void update(Table table) {
-		this.Melds = (ArrayList<Meld>) table.getMelds().clone();
+		//this.Melds = (ArrayList<Meld>) table.getMelds().clone();
+		this.tableSnapshot.setMelds(table.getMelds()); 
 	}
 	public void pushToTable(Table table) {
 		if (this.hand.isEmpty()) {
 			this.gameOver = true;
 		}
-		if(table.getMelds().containsAll(this.Melds) && this.Melds.containsAll(table.getMelds())) {
+		if(table.getMelds().containsAll(this.tableSnapshot.getMelds()) && this.tableSnapshot.getMelds().containsAll(table.getMelds())) {
 			System.out.println("No actions performed. Drawing Tile...");
 			drawTile(table.getPile());
 			System.out.println("New Hand:");
 			printTiles(this.hand);
 		}
-		table.updateTable(this.Melds, this.gameOver, this.status);
+		table.updateTable(this.tableSnapshot.getMelds(), this.gameOver, this.status);
 	}
 	
 	//GETTERS

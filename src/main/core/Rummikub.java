@@ -33,7 +33,7 @@ public class Rummikub {
 		Table table = new Table();
 		Player player = new Player();
 		Player player2 = new Player();
-		Player bot = new AI(1);
+		Player bot = new AI(2);
 		
 		table.registerObserver(player);
 		table.registerObserver(player2);
@@ -80,7 +80,9 @@ public class Rummikub {
 		player2.doTurn();
 		if(player2.endTurn())
 			player2.pushToTable(table);
-		bot.doTurn();
+		
+		((AI)bot).doTurn(table);
+		
 		
 	}
 

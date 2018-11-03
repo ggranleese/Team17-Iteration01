@@ -21,6 +21,7 @@ private IStrategy strategy;
 	
 	//METHODS
 	public void doTurn(Table table) {
+		System.out.println("BOT TURN");
 		ArrayList<Meld> whatToPlay;
 		whatToPlay = strategy.play(this.hand, table);
 		for(Meld m : whatToPlay) {

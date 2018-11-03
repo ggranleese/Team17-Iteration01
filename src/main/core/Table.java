@@ -60,5 +60,8 @@ public boolean status;
 	public boolean getGameOver() {
 		return this.gameOver;
 	}
-
+	//SETTERS
+	public void setMelds(ArrayList<Meld> melds) {
+		this.Melds = melds;
+	}
 }

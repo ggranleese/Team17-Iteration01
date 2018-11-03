@@ -6,6 +6,7 @@ public class AI extends Player{
 	//MEMBERS
 private IStrategy strategy;
 
+
 	//CONSTRUCTORS
 	public AI(int strat) {
 		this.hand = new ArrayList<Tile>();
@@ -20,16 +21,22 @@ private IStrategy strategy;
 	}
 	
 	//METHODS
+	public void drawHand() {
+		for(int i = 0; i<14; i++) {
+			drawTile(this.tableSnapshot.getPile());
+		}
+	}
+	
 	public void doTurn(Table table) {
 		System.out.println("BOT TURN");
 		ArrayList<Meld> whatToPlay;
-		whatToPlay = strategy.play(this.hand, table);
-		for(Meld m : whatToPlay) {
-			playMeld(m);
-			for(int i = 0; i > m.getTiles().size();i++) {
-				removeTile(m.getTiles().get(i).getColour(), m.getTiles().get(i).getValue());
-			}	
-		}
+//		whatToPlay = strategy.play(this.hand, table);
+//		for(Meld m : whatToPlay) {
+//			playMeld(m);
+//			for(int i = 0; i > m.getTiles().size();i++) {
+//				removeTile(m.getTiles().get(i).getColour(), m.getTiles().get(i).getValue());
+//			}	
+//		}
 	}
 	
 		//strategy.play(checkHandPlays);

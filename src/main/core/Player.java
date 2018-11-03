@@ -10,7 +10,7 @@ public class Player implements Observer{
 	public ArrayList<Tile> hand;
 	Scanner input = new Scanner(System.in);
 	//These are observed from Table
-	private Table tableSnapshot = new Table();
+	public Table tableSnapshot;
 	//private	ArrayList<Meld> Melds;
 	private boolean gameOver = false;
 	
@@ -18,14 +18,14 @@ public class Player implements Observer{
 	public Player() {
 		this.hand = new ArrayList<Tile>();
 		this.status = false;
-	}
+		this.tableSnapshot = new Table();
+		}
 	
 	//METHODS
-	public void drawHand(Pile pile) {
+	public void drawHand() {
 		System.out.println("Drawing Hand...");
 		for(int i = 0; i<14; i++) {
-			drawTile(pile);
-			pile.removeTile();
+			drawTile(this.tableSnapshot.getPile());
 		}
 		System.out.println("Your Hand:");
 		printTiles(this.hand);
@@ -501,13 +501,13 @@ public class Player implements Observer{
 			}
 		}
 	}
-	private void displayMelds() {
+	public void displayMelds() {
 		for(Meld m : this.tableSnapshot.getMelds()) {
             printTiles(m.getTiles());
         }
 	}
 	
-	private void printTiles(ArrayList<Tile> tiles) {
+	public void printTiles(ArrayList<Tile> tiles) {
 		String printVal = "{ ";
 		int counter = 1;
 		for (Tile t : tiles) {
@@ -521,7 +521,8 @@ public class Player implements Observer{
 	//OBSERVER METHODS
 	public void update(Table table) {
 		//this.Melds = (ArrayList<Meld>) table.getMelds().clone();
-		this.tableSnapshot.setMelds(table.getMelds()); 
+		this.tableSnapshot.setMelds(table.getMelds());
+		this.tableSnapshot.setPile(table.getPile());
 	}
 	public void pushToTable(Table table) {
 		if (this.hand.isEmpty()) {
@@ -529,11 +530,17 @@ public class Player implements Observer{
 		}
 		if(table.getMelds().containsAll(this.tableSnapshot.getMelds()) && this.tableSnapshot.getMelds().containsAll(table.getMelds())) {
 			System.out.println("No actions performed. Drawing Tile...");
+			if(this.tableSnapshot.getPile().getPile().isEmpty()) {
+				System.out.println("Can't draw tile. Pile is empty.");
+			}
+			else {
 			drawTile(table.getPile());
 			System.out.println("New Hand:");
 			printTiles(this.hand);
+			System.out.println("\n");
+			}
 		}
-		table.updateTable(this.tableSnapshot.getMelds(), this.gameOver, this.status);
+		table.updateTable(this.tableSnapshot.getMelds(), this.gameOver, this.status, this.tableSnapshot.getPile());
 	}
 	
 	//GETTERS

@@ -43,9 +43,10 @@ public boolean status;
 		}
 		
 	}
-	public void updateTable(ArrayList<Meld> updatedMelds, boolean gameOver, boolean status) {
+	public void updateTable(ArrayList<Meld> updatedMelds, boolean gameOver, boolean status, Pile updatedPile) {
 		this.gameOver = gameOver;
 		this.Melds = updatedMelds;
+		this.pile = updatedPile;
 		if(status = true)
 			this.status = true;
 		notifyObservers();
@@ -63,5 +64,8 @@ public boolean status;
 	//SETTERS
 	public void setMelds(ArrayList<Meld> melds) {
 		this.Melds = melds;
+	}
+	public void setPile(Pile pile) {
+		this.pile = pile;
 	}
 }

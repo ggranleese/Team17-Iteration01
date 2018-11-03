@@ -33,7 +33,7 @@ public class Rummikub {
 		Table table = new Table();
 		Player player = new Player();
 		Player player2 = new Player();
-		Player bot = new AI(1);
+		Player bot = new AI(2);
 		
 		table.registerObserver(player);
 		table.registerObserver(player2);
@@ -41,7 +41,7 @@ public class Rummikub {
 		table.notifyObservers();
 		table.getPile().populate();
 		table.getPile().shuffle();
-		
+		System.out.println(table.getPile().getPile().size());
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		tiles.add(new Tile(1,10));
 		tiles.add(new Tile(2,10));
@@ -56,15 +56,15 @@ public class Rummikub {
 		ArrayList<Tile> tiles3 = new ArrayList<Tile>();
 		tiles3.add(new Tile(1,8));
 		tiles3.add(new Tile(1,9));
-		tiles3.add(new Tile(3,10));
+		tiles3.add(new Tile(1,10));
 		
 		Set run = new Set(tiles);
 		Set run2 = new Set(tiles2);
 		Run set = new Run(tiles3);
 		
-		player.playMeld(run);
-		player.playMeld(run2);
-		player.playMeld(set);
+		//player.playMeld(run);
+		//player.playMeld(run2);
+		//player.playMeld(set);
 		
 		player.drawHand(table.getPile());
 		
@@ -80,7 +80,9 @@ public class Rummikub {
 		player2.doTurn();
 		if(player2.endTurn())
 			player2.pushToTable(table);
-		bot.doTurn();
+		
+		((AI)bot).doTurn(table);
+		
 		
 	}
 

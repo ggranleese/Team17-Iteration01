@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class StrategyOne implements IStrategy {
 
-	public ArrayList<Meld> play(ArrayList<Tile> hand){
+	public ArrayList<Meld> play(ArrayList<Tile> hand, Table table){
 		return checkPlays(hand);
 	}
 	public ArrayList<Meld> checkPlays(ArrayList<Tile> hand){

@@ -10,11 +10,13 @@ private	ArrayList<Meld> Melds;
 private List<Observer> observers;
 private Pile pile;
 private boolean gameOver = false;
+public boolean status;
 
 	public Table(){
 		this.observers = new ArrayList<Observer>();
 		this.Melds = new ArrayList<Meld>();
 		this.pile = new Pile();
+		this.status = false;
 	}
 	//METHODS
 	//--don't really need this, I think it's just for testing.
@@ -41,9 +43,11 @@ private boolean gameOver = false;
 		}
 		
 	}
-	public void updateTable(ArrayList<Meld> updatedMelds, boolean gameOver) {
+	public void updateTable(ArrayList<Meld> updatedMelds, boolean gameOver, boolean status) {
 		this.gameOver = gameOver;
 		this.Melds = updatedMelds;
+		if(status = true)
+			this.status = true;
 		notifyObservers();
 	}
 	//GETTERS

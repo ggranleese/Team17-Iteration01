@@ -262,16 +262,6 @@ public class Player implements Observer{
 			case 1: 
 				playOptions();
 				break;
-//			case 2: 
-//				if (this.status == false) {
-//					System.out.println("Must have 30 or more points to do this.");
-//					doTurn();
-//					break;
-//				}
-//				else {
-//					tableOptions();
-//					break;
-//				}
 			case 2:
 				endTurn();
 				break;
@@ -293,8 +283,14 @@ public class Player implements Observer{
 				createMeld();
 				break;
 			case 2: 
-				modifyMeld();
-				break;
+				if (this.status == false) {
+					System.out.println("Must have 30 or more points to do this.");
+					playOptions();
+					break;
+				}
+				else
+					modifyMeld();
+					break;
 			case 3: 
 				break;
 			case 4:
@@ -396,6 +392,7 @@ public class Player implements Observer{
 				}
 				continue;
 			case 3:
+				try {
 				Run testRun = new Run(buffer);
 				Set testSet = new Set(buffer);
 				
@@ -405,6 +402,11 @@ public class Player implements Observer{
 					playMeld(testSet);
 				}else {
 					System.out.println("INVAID MELD");
+					break;
+				}
+				}catch (Exception e) {
+					System.out.println("Nothing was played.");
+					createMeld();
 					break;
 				}
 				
@@ -565,15 +567,13 @@ public class Player implements Observer{
 		String printVal = "{ ";
 		int counter = 1;
 		for (Tile t : tiles) {
-			printVal += counter + "-" + t.toString() + " ";
+			printVal += counter + ".[" + t.toString() + "] ";
 			counter++;
 		}
 		printVal += "}";
 		System.out.println(printVal);
 	}
-		
 	
-	//OBSERVER METHODS
 	//OBSERVER METHODS
 	public void update(Table table) {
 		this.Melds = (ArrayList<Meld>) table.getMelds().clone();
@@ -588,9 +588,8 @@ public class Player implements Observer{
 			System.out.println("New Hand:");
 			printTiles(this.hand);
 		}
-		table.updateTable(this.Melds, this.gameOver);
+		table.updateTable(this.Melds, this.gameOver, this.status);
 	}
-	//GETTERS
 	
 	//GETTERS
 	public ArrayList<Tile> getHand() {

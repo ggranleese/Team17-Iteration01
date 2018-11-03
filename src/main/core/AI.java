@@ -1,13 +1,9 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 
 public class AI extends Player{
 	//MEMBERS
-//private ArrayList<Tile> hand;
-private Boolean status;
 private IStrategy strategy;
 
 	//CONSTRUCTORS
@@ -24,10 +20,9 @@ private IStrategy strategy;
 	}
 	
 	//METHODS
-	@Override
-	public void doTurn() {
+	public void doTurn(Table table) {
 		ArrayList<Meld> whatToPlay;
-		whatToPlay = strategy.play(this.hand);
+		whatToPlay = strategy.play(this.hand, table);
 		for(Meld m : whatToPlay) {
 			playMeld(m);
 			for(int i = 0; i > m.getTiles().size();i++) {
@@ -36,11 +31,6 @@ private IStrategy strategy;
 		}
 	}
 	
-	
-	
-	
-
-		
 		//strategy.play(checkHandPlays);
 	
 	

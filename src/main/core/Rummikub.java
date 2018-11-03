@@ -56,15 +56,15 @@ public class Rummikub {
 		ArrayList<Tile> tiles3 = new ArrayList<Tile>();
 		tiles3.add(new Tile(1,8));
 		tiles3.add(new Tile(1,9));
-		tiles3.add(new Tile(3,10));
+		tiles3.add(new Tile(1,10));
 		
 		Set run = new Set(tiles);
 		Set run2 = new Set(tiles2);
 		Run set = new Run(tiles3);
 		
-		player.playMeld(run);
-		player.playMeld(run2);
-		player.playMeld(set);
+		//player.playMeld(run);
+		//player.playMeld(run2);
+		//player.playMeld(set);
 		
 		player.drawHand(table.getPile());
 		

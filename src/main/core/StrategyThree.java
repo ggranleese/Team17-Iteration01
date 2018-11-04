@@ -14,15 +14,17 @@ public class StrategyThree implements IStrategy {
 		}
 		
 		if(counter - hand.size() == 0) {
+			return plays;	
+		}
+		if(threeFewerExists(hand, table)) {
 			return plays;
-		}else if(checkTotalPoints(plays) > 30) {
+		} 
+		if(checkTotalPoints(plays) > 30) {
 			return plays;
 		}else {
 			plays.clear();
 			return plays;
 		}
-		
-		
 		
 	}
 	
@@ -140,5 +142,13 @@ public class StrategyThree implements IStrategy {
 		return colour;
 	}
 
-	
+	public boolean threeFewerExists(ArrayList<Tile> hand,Table table) {
+		int size = hand.size();
+		for(Observer o : table.getObservers()) {
+			if(((Player)o).getHand().size() - size == 3) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -31,7 +31,7 @@ public class checkHandPlaysTest extends TestCase {
 		bot.addTile(new Tile(4,1));
 		bot.addTile(new Tile(4,1));
 		
-		//assertTrue(bot.checkHandPlays().get(0) == set);
+		assertTrue(bot.checkHandPlays().get(0) == set);
 		assertTrue(bot.checkHandPlays().get(1) == run);
 
 

@@ -554,6 +554,7 @@ public class Player implements Observer{
 		this.tableSnapshot.setMelds((ArrayList<Meld>) table.getMelds().clone());
 		this.tableSnapshot.setPile( table.getPile());
 		this.tableSnapshot.status = table.status;
+		this.tableSnapshot.setObservers(table.getObservers());
 	}
 	public void pushToTable(Table table) {
 		if (this.hand.isEmpty()) {

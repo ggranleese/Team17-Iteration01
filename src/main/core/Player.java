@@ -324,7 +324,7 @@ public class Player implements Observer{
 				break;
 		}
 	}
-
+	
 	public ArrayList<Tile> fromMeldAndHand(){
 		 ArrayList<Tile> tiles = new ArrayList<Tile>();
 		 
@@ -364,7 +364,6 @@ public class Player implements Observer{
 		 
 		
 	}
-	
 
 	public void createMeld() {
 		

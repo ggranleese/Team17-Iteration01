@@ -28,25 +28,26 @@ private int stratNum;
 	}
 	
 	public void doTurn(Table table) {
-
+		
 		System.out.println("BOT " + this.stratNum+ " TURN");
 		ArrayList<Meld> whatToPlay;
-//		whatToPlay = strategy.play(this.hand, table);
-//		for(Meld m : whatToPlay) {
-//			playMeld(m);
-//			for(int i = 0; i > m.getTiles().size();i++) {
-//				removeTile(m.getTiles().get(i).getColour(), m.getTiles().get(i).getValue());
-//			}	
-//		}
+		whatToPlay = strategy.play(this.hand, table);
+		for(Meld m : whatToPlay) {
+			playMeld(m);
+			//this removes every tile used in the meld from your hand
+			for(int i = 0; i > m.getTiles().size();i++) {
+				removeTile(m.getTiles().get(i).getColour(), m.getTiles().get(i).getValue());
+			}	
+		}
 	}
-	
-		//strategy.play(checkHandPlays);
 	
 	
 	public ArrayList<Meld> checkHandPlays(){
 		ArrayList<Meld> possiblePlays = new ArrayList<Meld>();
+		System.out.println("number of possible runs: " + checkRun().size());
+		System.out.println("number of possible sets: " + checkSet().size());
 		possiblePlays.addAll(checkRun());
-		//possiblePlays.addAll(checkSet());
+		possiblePlays.addAll(checkSet());
 		return possiblePlays;
 		
 	}

@@ -27,7 +27,7 @@ public class HandToMeldTest extends TestCase{
 		
 		int initial = table.getMelds().get(0).getTiles().size();
 	
-		player.drawHand(table.getPile());
+		player.drawHand();
 		
 		player.addToMeld(player.fromHand());
 		player.pushToTable(table);

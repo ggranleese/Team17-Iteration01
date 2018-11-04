@@ -100,11 +100,7 @@ public class Player implements Observer{
 		}
 		return input;
 	}
-	
-	
 
-	
-	
 	public void playMeld(Meld m) {
 		
 		this.tableSnapshot.getMelds().add(m);

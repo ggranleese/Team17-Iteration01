@@ -52,20 +52,23 @@ public class Rummikub {
 		//player.playMeld(set);
 		
 		player.drawHand();
+		player.sortHand();
 		bot1.drawHand();
 		bot1.sortHand();
+		bot1.addTile(new Tile(1,10));
+		bot1.addTile(new Tile(1,11));
+		bot1.addTile(new Tile(1,12));
 		bot2.drawHand();
 		bot2.sortHand();
+		bot1.addTile(new Tile(1,10));
+		bot1.addTile(new Tile(1,11));
+		bot1.addTile(new Tile(1,12));
 		bot3.drawHand();
 		bot3.sortHand();
 		
 		
 		while(table.getGameOver() == false) {
 			
-			player.addTile(new Tile(1,1));
-			player.addTile(new Tile(1,2));
-			player.addTile(new Tile(1,3));
-			player.sortHand();
 			player.doTurn();
 			
 			if(player.endTurn()) {
@@ -75,18 +78,21 @@ public class Rummikub {
 				System.out.println("Invalid melds played.\n");
 			}
 	
-			
-			((AI)bot1).doTurn();
-			bot1.pushToTable(table);
-			
-			((AI)bot2).doTurn();
-			bot2.pushToTable(table);
-			
-			((AI)bot3).doTurn();
-			bot3.getHand().clear();
-			bot3.pushToTable(table);
+			if(!table.getGameOver()) {
+				((AI)bot1).doTurn();
+				bot1.pushToTable(table);
+			}
+			if(!table.getGameOver()) {
+				((AI)bot2).doTurn();
+				bot2.pushToTable(table);
+			}
+			if(!table.getGameOver()) {
+				//((AI)bot3).doTurn();
+				//bot3.getHand().clear();
+				//bot3.pushToTable(table);
+			}
 		}
-		System.out.println("Ganme Over.");
+		System.out.println("Game Over.");
 	}
 		
 	

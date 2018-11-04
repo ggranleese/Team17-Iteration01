@@ -15,7 +15,7 @@ public class EndGameTest extends TestCase{
 		table.registerObserver(player2);
 		table.notifyObservers();
 		
-		player.drawHand(pile);
+		player.drawHand();
 		
 		if(player.endTurn())
 			player.pushToTable(table);

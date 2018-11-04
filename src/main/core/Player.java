@@ -34,14 +34,14 @@ public class Player implements Observer{
 	
 	public void removeTile(int c, int v) {
 		
-		int n = this.hand.size();
-		
-		for(int i =0; i<n; i++) {
-			if(this.hand.get(i).getValue() == v && this.hand.get(i).getColour() == c) {
-				this.hand.remove(i);
+		for (Tile t : hand) {
+			
+			if(t.getColour() == c && t.getValue() == v) {
+				this.hand.remove(t);
 				break;
 			}
 		}
+		
 	}
 	
 	public void sortHand() {
@@ -100,11 +100,7 @@ public class Player implements Observer{
 		}
 		return input;
 	}
-	
-	
 
-	
-	
 	public void playMeld(Meld m) {
 		
 		this.tableSnapshot.getMelds().add(m);
@@ -399,8 +395,10 @@ public class Player implements Observer{
 				
 				if(testRun.isValid()) {
 					playMeld(testRun);
+					break;
 				}else if(testSet.isValid()) {
 					playMeld(testSet);
+					break;
 				}else {
 					System.out.println("INVAID MELD");
 					break;
@@ -521,8 +519,8 @@ public class Player implements Observer{
 	//OBSERVER METHODS
 	public void update(Table table) {
 		//this.Melds = (ArrayList<Meld>) table.getMelds().clone();
-		this.tableSnapshot.setMelds(table.getMelds());
-		this.tableSnapshot.setPile(table.getPile());
+		this.tableSnapshot.setMelds((ArrayList<Meld>) table.getMelds().clone());
+		this.tableSnapshot.setPile( table.getPile());
 	}
 	public void pushToTable(Table table) {
 		if (this.hand.isEmpty()) {

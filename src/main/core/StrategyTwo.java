@@ -6,23 +6,33 @@ public class StrategyTwo implements IStrategy {
 
 	public ArrayList<Meld> play(ArrayList<Tile> hand, Table table) {
 		ArrayList<Meld> plays = new ArrayList<Meld>();
-	
+		
+		//if someone else has played their 30
 		if(table.status) {
-			checkRun(hand);
-			checkSet(hand);
+			System.out.println("Another player has played 30 points. Attempting to play...");
 			plays = checkHandPlays(hand);
-			//not the right condition
-			if (plays.get(0).getTiles().get(0).getValue() < 30) {
+			//checks all melds in plays and counts values of all tiles
+			int counter = 0;
+			for (Meld m : plays) {
+				for (Tile t : m.getTiles()) {
+					counter += t.getValue();
+				}
+			}
+			//if value of plays is under 30, return empty plays (draw a tile)
+			if (counter < 30) {
+				System.out.println("Unable to play. Value of plays less than 30.");
 				plays.clear();
 				return plays;
 			}
-				//return empty(draw a tile)
+			//else return plays
 			else {
 				return plays;
 			}
 		
 		}
+		// if no one else has played their 30 return empty (draw a tile)
 		else {
+			System.out.println("No other player has played 30 points. Ending turn...");
 			plays.clear();
 			return plays;
 		}
@@ -121,6 +131,9 @@ public class StrategyTwo implements IStrategy {
 
 	public ArrayList<Meld> checkHandPlays(ArrayList<Tile> hand){
 		ArrayList<Meld> possiblePlays = new ArrayList<Meld>();
+		System.out.println(hand.size());
+		System.out.println("number of possible runs: " + checkRun(hand).size());
+		System.out.println("number of possible sets: " + checkSet(hand).size());
 		possiblePlays.addAll(checkRun(hand));
 		possiblePlays.addAll(checkSet(hand));
 		return possiblePlays;

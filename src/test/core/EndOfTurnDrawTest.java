@@ -31,7 +31,7 @@ public class EndOfTurnDrawTest extends TestCase{
 		assertTrue(sizeAfterTurn == sizeBeforeTurn);
 		
 		
-		player2.drawHand(table.getPile());
+		player2.drawHand();
 		
 		sizeBeforeTurn = player2.getHand().size();
 		if(player2.endTurn())

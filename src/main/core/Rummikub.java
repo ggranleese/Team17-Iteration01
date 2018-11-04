@@ -75,18 +75,21 @@ public class Rummikub {
 				System.out.println("Invalid melds played.\n");
 			}
 	
-			
-			((AI)bot1).doTurn();
-			bot1.pushToTable(table);
-			
-			((AI)bot2).doTurn();
-			bot2.pushToTable(table);
-			
-			//((AI)bot3).doTurn();
-			//bot3.getHand().clear();
-			//bot3.pushToTable(table);
+			if(!table.getGameOver()) {
+				((AI)bot1).doTurn();
+				bot1.pushToTable(table);
+			}
+			if(!table.getGameOver()) {
+				((AI)bot2).doTurn();
+				bot2.pushToTable(table);
+			}
+			if(!table.getGameOver()) {
+				//((AI)bot3).doTurn();
+				//bot3.getHand().clear();
+				//bot3.pushToTable(table);
+			}
 		}
-		System.out.println("Ganme Over.");
+		System.out.println("Game Over.");
 	}
 		
 	

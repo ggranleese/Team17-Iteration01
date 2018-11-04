@@ -28,7 +28,6 @@ private int stratNum;
 	}
 	
 	public void doTurn() {
-		
 		System.out.println("BOT " + this.stratNum+ " TURN");
 		ArrayList<Meld> whatToPlay;
 		whatToPlay = strategy.play(this.hand, this.tableSnapshot);

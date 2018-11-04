@@ -17,7 +17,6 @@ public class StrategyTwoWinsTest extends TestCase{
 		table.getPile().populate();
 		table.getPile().shuffle();
 		
-		int initial = table.getMelds().size();
 		//p2 should play a run and win the game even if the run is not 30+
 		p.drawHand();
 		ArrayList<Tile> t = new ArrayList<Tile>();
@@ -32,10 +31,11 @@ public class StrategyTwoWinsTest extends TestCase{
 		bot.addTile(new Tile(1,5));
 		bot.addTile(new Tile(1,6));
 		
+		assertTrue(!table.getGameOver());
+		
 		((AI)bot).doTurn();
 		((AI)bot).pushToTable(table);
 		
-		assertTrue(initial + 1 == table.getMelds().size());
 		assertTrue(table.getGameOver());
 		
 	}

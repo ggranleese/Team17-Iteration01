@@ -12,7 +12,7 @@ public class Player implements Observer{
 	//These are observed from Table
 	public Table tableSnapshot;
 	//private	ArrayList<Meld> Melds;
-	private boolean gameOver = false;
+	protected boolean gameOver = false;
 	
 	//CONSTRUCTORS
 	public Player() {
@@ -527,11 +527,12 @@ public class Player implements Observer{
 	public void pushToTable(Table table) {
 		if (this.hand.isEmpty()) {
 			this.gameOver = true;
+			System.out.println("Player Wins!\n");
 		}
-		if(table.getMelds().containsAll(this.tableSnapshot.getMelds()) && this.tableSnapshot.getMelds().containsAll(table.getMelds())) {
+		if(!this.gameOver && table.getMelds().containsAll(this.tableSnapshot.getMelds()) && this.tableSnapshot.getMelds().containsAll(table.getMelds())) {
 			System.out.println("No actions performed. Drawing Tile...");
 			if(this.tableSnapshot.getPile().getPile().isEmpty()) {
-				System.out.println("Can't draw tile. Pile is empty.");
+				System.out.println("Can't draw tile. Pile is empty.\n");
 			}
 			else {
 			drawTile(table.getPile());

@@ -18,11 +18,27 @@ public class StrategyTwo implements IStrategy {
 					counter += t.getValue();
 				}
 			}
-			//if value of plays is under 30, return empty plays (draw a tile)
+			//if value of plays is under 30
 			if (counter < 30) {
+				
+			//check if plays would allow player to win
+				ArrayList<Tile> tmp = new ArrayList<Tile>();
+				for (Meld m : plays) {
+					for(Tile t: m.getTiles()) {
+						tmp.add(t);
+					}
+				}
+			
+				if(tmp.containsAll(hand)) {
+					System.out.println("Bot 2 wins the game!");
+					return plays;
+				}
+				//else return empty
+				else {
 				System.out.println("Unable to play. Value of plays less than 30.");
 				plays.clear();
 				return plays;
+				}
 			}
 			//else return plays
 			else {

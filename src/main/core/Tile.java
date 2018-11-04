@@ -47,4 +47,12 @@ public class Tile {
 		}
 		return printVal;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		Tile t = (Tile) obj;
+		if (this.value == t.value && this.colour == t.colour) {
+			return true;
+		}
+		else return false;
+	}
 }

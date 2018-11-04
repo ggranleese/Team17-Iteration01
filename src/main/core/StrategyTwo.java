@@ -19,8 +19,8 @@ public class StrategyTwo implements IStrategy {
 				}
 			}
 			//if value of plays is under 30, return empty plays (draw a tile)
-			System.out.println("Unable to play. Value of plays less than 30.");
 			if (counter < 30) {
+				System.out.println("Unable to play. Value of plays less than 30.");
 				plays.clear();
 				return plays;
 			}

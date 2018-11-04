@@ -53,13 +53,21 @@ public class Rummikub {
 		
 		player.drawHand();
 		bot1.drawHand();
+		bot1.sortHand();
 		bot2.drawHand();
+		bot2.sortHand();
 		bot3.drawHand();
+		bot3.sortHand();
 		
 		
 		while(table.getGameOver() == false) {
 			
+			player.addTile(new Tile(1,1));
+			player.addTile(new Tile(1,2));
+			player.addTile(new Tile(1,3));
+			player.sortHand();
 			player.doTurn();
+			
 			if(player.endTurn()) {
 				player.pushToTable(table);
 			}
@@ -68,13 +76,13 @@ public class Rummikub {
 			}
 	
 			
-			((AI)bot1).doTurn(table);
+			((AI)bot1).doTurn();
 			bot1.pushToTable(table);
 			
-			((AI)bot2).doTurn(table);
+			((AI)bot2).doTurn();
 			bot2.pushToTable(table);
 			
-			((AI)bot3).doTurn(table);
+			((AI)bot3).doTurn();
 			bot3.getHand().clear();
 			bot3.pushToTable(table);
 		}

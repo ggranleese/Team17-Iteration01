@@ -20,7 +20,7 @@ public class StrategyTwoPlaysTest extends TestCase{
 		int initial = table.getMelds().size();
 		//p2 should do nothing as no one else has played 30
 		
-		((AI)bot).doTurn(table);
+		((AI)bot).doTurn();
 		bot.pushToTable(table);
 		
 		assertTrue(initial == table.getMelds().size());
@@ -43,7 +43,7 @@ public class StrategyTwoPlaysTest extends TestCase{
 		bot.addTile(new Tile(3,10));
 		
 		//p2 should play a set as p1 has already played 30
-		((AI)bot).doTurn(table);
+		((AI)bot).doTurn();
 		((AI)bot).pushToTable(table);
 		
 		assertTrue(initial < table.getMelds().size());

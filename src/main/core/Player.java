@@ -364,6 +364,7 @@ public class Player implements Observer{
 		 
 		
 	}
+ 
 	
 
 	public void createMeld() {

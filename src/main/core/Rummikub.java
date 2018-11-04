@@ -55,6 +55,9 @@ public class Rummikub {
 		player.sortHand();
 		bot1.drawHand();
 		bot1.sortHand();
+		bot1.addTile(new Tile(1,10));
+		bot1.addTile(new Tile(1,11));
+		bot1.addTile(new Tile(1,12));
 		bot2.drawHand();
 		bot2.sortHand();
 		bot1.addTile(new Tile(1,10));

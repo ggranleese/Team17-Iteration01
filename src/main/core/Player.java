@@ -126,7 +126,7 @@ public class Player implements Observer{
 	}
 
 	public void playMeld(Meld m) {
-		
+		printNew(m);
 		this.tableSnapshot.getMelds().add(m);
 	
 		if(this.status == false) {
@@ -324,21 +324,9 @@ public class Player implements Observer{
 				break;
 		}
 	}
-//	
-//	public void modifyMeld() {
-//		Meld meld = selectMeld();
-//		int tileNum;
-//		System.out.println("Select tiles:");
-//		printTiles(meld.getTiles());
-//		tileNum = input.nextInt();
-//
-//		
-//	}
-	
 
 	public ArrayList<Tile> fromMeldAndHand(){
 		 ArrayList<Tile> tiles = new ArrayList<Tile>();
-		 
 		 
 		 while(true) {
 			 System.out.println("1.Choose tiles from Hand");
@@ -352,9 +340,7 @@ public class Player implements Observer{
 				 System.out.println("Select tile from hand:");
 				 printTiles(this.hand);
 				 int choice = input.nextInt();
-				 
-				 
-				 
+				 	 
 			 }
 			 
 			 if(n == 2) {
@@ -541,6 +527,28 @@ public class Player implements Observer{
 		System.out.println(printVal);
 	}
 	
+	public void printNew(Meld newMeld) {
+		String printVal = "";
+		for(Meld m : this.tableSnapshot.getMelds()) {
+			printVal += "{ ";
+			ArrayList<Tile> tmp = m.getTiles();
+			for (Tile t : tmp) {
+				printVal +=  "[" + t.toString() + "] ";
+			}
+			printVal += "}\n";
+        }
+		
+			printVal += "*{ ";
+			ArrayList<Tile> tiles = newMeld.getTiles();
+			for (Tile t : tiles) {
+				printVal +=  "[" + t.toString() + "] ";
+			}
+			printVal += "} \n";
+		
+		
+        System.out.println(printVal);
+	}
+	
 	//OBSERVER METHODS
 	public void update(Table table) {
 		//this.Melds = (ArrayList<Meld>) table.getMelds().clone();
@@ -582,5 +590,11 @@ public class Player implements Observer{
 	public int getSize() {
 		return this.hand.size();
 	}
-
+	//SETTERS
+	public void setStatus(boolean b) {
+		this.status = b;
+	}
+	public void setGameOver(boolean b) {
+		this.gameOver = b;
+	}
 }

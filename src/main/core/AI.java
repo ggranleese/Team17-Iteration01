@@ -35,6 +35,7 @@ private int stratNum;
 	
 		for(Meld m : whatToPlay) {
 			super.printTiles(m.getTiles());
+			System.out.println("\n");
 			playMeld(m);
 			
 			//this removes every tile used in the meld from your hand

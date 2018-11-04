@@ -113,6 +113,7 @@ public class Player implements Observer{
 			}
 			
 			this.pointCounter += meldPoints;
+			
 			if(pointCounter >= 30) {
 				this.status = true;
 			}
@@ -521,6 +522,7 @@ public class Player implements Observer{
 		//this.Melds = (ArrayList<Meld>) table.getMelds().clone();
 		this.tableSnapshot.setMelds((ArrayList<Meld>) table.getMelds().clone());
 		this.tableSnapshot.setPile( table.getPile());
+		this.tableSnapshot.status = table.status;
 	}
 	public void pushToTable(Table table) {
 		if (this.hand.isEmpty()) {
@@ -538,6 +540,7 @@ public class Player implements Observer{
 			System.out.println("\n");
 			}
 		}
+	
 		table.updateTable(this.tableSnapshot.getMelds(), this.gameOver, this.status, this.tableSnapshot.getPile());
 	}
 	

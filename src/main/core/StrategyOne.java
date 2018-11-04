@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class StrategyOne implements IStrategy {
 
@@ -56,42 +57,30 @@ public class StrategyOne implements IStrategy {
 	}
 	
 	public ArrayList<Set> checkSet(ArrayList<Tile> hand){
-		ArrayList<Set> sets = new ArrayList<Set>();
-		ArrayList<Tile> hold = new ArrayList<Tile>();
-
-		
-		for(int i=1; i<=4; i++){
-			for(int t=0; t<colourSplitter(hand, i).size(); t++) {
-				
-				int counter = 1;
-				hold.add(colourSplitter(hand, i).get(t));
-				
-				for(int j=1; j<=4; j++) {
-					if(j==i){
-						
-						for(Tile x: colourSplitter(hand, j)) {
-							if(x.getValue() == colourSplitter(hand, i).get(t).getValue()) {
-								counter++;
-								hold.add(x);
-								break;
-							}
-						}
-					}
-					if(counter <3){
-						hold.clear();
-					}else {
-						sets.add(new Set(hold));
-						hold.clear();
-						counter = 1;
-					}
+		ArrayList<Set> sets = null;
+		HashSet<Integer> values = new HashSet<Integer>();
+		ArrayList<ArrayList<Tile>> hold2 = new ArrayList<ArrayList<Tile>>();
+		for(Tile t : hand){
+			values.add(t.getValue());
+		}
+		for(Integer i : values) {
+			ArrayList<Tile> hold = new ArrayList<Tile>();
+			for(Tile t : hand) {
+				if(t.getValue() == i) {
+					hold.add(t);
 				}
-
+			}
+			hold2.add(hold);
+		}
+		for(ArrayList<Tile> o : hold2) {
+			for(Tile t: o) {
+				int next = t.getColour() +1;
+				int twoNext = t.getColour() +2;
+				int threeNext = t.getColour() +3;
+				
 			}
 		}
-		
 		return sets;
-		
-		
 	}
 	public ArrayList<Tile> colourSplitter(ArrayList<Tile> hand, int i) {
 		

@@ -1,6 +1,8 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Player implements Observer{
@@ -27,6 +29,7 @@ public class Player implements Observer{
 		for(int i = 0; i<14; i++) {
 			drawTile(this.tableSnapshot.getPile());
 		}
+		sortHand();
 		System.out.println("Your Hand:");
 		printTiles(this.hand);
 		System.out.println("\n");
@@ -75,6 +78,27 @@ public class Player implements Observer{
 		insertionSort(red);
 		insertionSort(green);
 		insertionSort(orange);
+		
+		Collections.sort(blue, new Comparator<Tile>() {
+			public int compare(Tile s2, Tile s1) {
+				return Integer.compare(s2.getValue(), s1.getValue());
+			}
+		});
+		Collections.sort(red, new Comparator<Tile>() {
+			public int compare(Tile s2, Tile s1) {
+				return Integer.compare(s2.getValue(), s1.getValue());
+			}
+		});
+		Collections.sort(green, new Comparator<Tile>() {
+			public int compare(Tile s2, Tile s1) {
+				return Integer.compare(s2.getValue(), s1.getValue());
+			}
+		});
+		Collections.sort(orange, new Comparator<Tile>() {
+			public int compare(Tile s2, Tile s1) {
+				return Integer.compare(s2.getValue(), s1.getValue());
+			}
+		});
 		
 		finished.addAll(blue);
 		finished.addAll(red);

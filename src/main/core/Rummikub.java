@@ -52,6 +52,7 @@ public class Rummikub {
 		//player.playMeld(set);
 		
 		player.drawHand();
+		player.sortHand();
 		bot1.drawHand();
 		bot1.sortHand();
 		bot2.drawHand();
@@ -65,7 +66,6 @@ public class Rummikub {
 		
 		while(table.getGameOver() == false) {
 			
-			player.sortHand();
 			player.doTurn();
 			
 			if(player.endTurn()) {

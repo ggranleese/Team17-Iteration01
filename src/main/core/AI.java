@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 public class AI extends Player{
 	//MEMBERS
-//private ArrayList<Tile> hand;
-private Boolean status;
 private IStrategy strategy;
+private int stratNum;
 
 	//CONSTRUCTORS
 	public AI(int strat) {
 		this.hand = new ArrayList<Tile>();
-		
+		this.stratNum = strat;
 		if(strat == 1) {
 			this.strategy = new StrategyOne();
 		}else if(strat == 2){
@@ -22,54 +21,11 @@ private IStrategy strategy;
 	}
 	
 	//METHODS
-	@Override
-	public void doTurn() {
-		System.out.println("Im a bot");
-		//strategy.play(checkHandPlays);
-	}
-	
-	public ArrayList<Meld> checkHandPlays(){
-		ArrayList<Meld> possiblePlays = new ArrayList<Meld>();
-		possiblePlays.addAll(checkRun());
-		//possiblePlays.addAll(checkSet());
-		return possiblePlays;
-		
-	}
-	
-	public ArrayList<Run> checkRun(){
-		
-		
-		ArrayList<Run> runs = new ArrayList<Run>();
-		ArrayList<Tile> hold = new ArrayList<Tile>();
-		
-		for(int i=1; i<=4; i++) {
-			
-			ArrayList<Tile> colour = new ArrayList<Tile>();
-			colour.addAll(colourSplitter(i));
-			
-			int counter = 1;
-			
-			for(int t=0; t<colour.size(); t++) {
-			
-				hold.add(this.hand.get(t));
-			
-				try {
-				if(this.hand.get(t).getValue()+1 == this.hand.get(t+1).getValue()){
-					counter++;
-
-				}}catch(Exception IndexOutOfBoundsException) {
-					if(counter <3) {
-						hold.clear();
-						
-					}else {
-						hold.add(this.hand.get(t));
-						runs.add(new Run(hold));
-						
-					}
-					counter = 1;
-				}
-			}
+	public void drawHand() {
+		for(int i = 0; i<14; i++) {
+			drawTile(this.tableSnapshot.getPile());
 		}
+<<<<<<< HEAD
 			
 			return runs;
 		
@@ -79,20 +35,29 @@ private IStrategy strategy;
 //		
 //		
 //	}
+=======
+		sortHand();
+		System.out.println("Bot " + stratNum + " Hand:");
+		printTiles(this.hand);
+		System.out.println("\n");
+	}
+>>>>>>> 473e880b8f906725c12ab876cae1a1af7911bdc4
 	
-	public ArrayList<Tile> colourSplitter(int i) {
-		
-		ArrayList<Tile> colour = new ArrayList<Tile>();
-		
-		for(int t = 0; t<this.hand.size(); t++) {
-			if(this.hand.get(t).getColour() == i) {
-				colour.add(this.hand.get(t));
-			}
+	public void doTurn() {
+		System.out.println("BOT " + this.stratNum+ " TURN");
+		ArrayList<Meld> whatToPlay;
+		whatToPlay = strategy.play(this.hand, this.tableSnapshot);
+			
+		for(Meld m : whatToPlay) {
+			System.out.println("p" + stratNum + " played tiles.");
+			playMeld(m);
+			//this removes every tile used in the meld from your hand
+			for(Tile t: m.getTiles()) {
+				super.removeTile(t.getColour(), t.getValue());
+			}	
 		}
 		
-		return colour;
 	}
-	
 	//GETTERS
 	
 }

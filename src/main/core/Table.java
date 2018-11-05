@@ -10,11 +10,13 @@ private	ArrayList<Meld> Melds;
 private List<Observer> observers;
 private Pile pile;
 private boolean gameOver = false;
+public boolean status;
 
 	public Table(){
-		this.observers = new ArrayList<Observer>();
+		this.setObservers(new ArrayList<Observer>());
 		this.Melds = new ArrayList<Meld>();
 		this.pile = new Pile();
+		this.status = false;
 	}
 	//METHODS
 	//--don't really need this, I think it's just for testing.
@@ -24,11 +26,11 @@ private boolean gameOver = false;
 	//OBSERVER
 	public void registerObserver(Observer observer) {
 		if(observer!=null) {
-			this.observers.add(observer);
+			this.getObservers().add(observer);
 		}
 	}
 	public void notifyObservers() {
-		Iterator<Observer> i = observers.iterator();
+		Iterator<Observer> i = getObservers().iterator();
 		while(i.hasNext()) {
 			Observer observer = i.next();
 			observer.update(this);
@@ -37,13 +39,16 @@ private boolean gameOver = false;
 	}
 	public void removeObserver(Observer observer) {
 		if(observer!=null) {
-			this.observers.remove(observer);
+			this.getObservers().remove(observer);
 		}
 		
 	}
-	public void updateTable(ArrayList<Meld> updatedMelds, boolean gameOver) {
+	public void updateTable(ArrayList<Meld> updatedMelds, boolean gameOver, boolean status, Pile updatedPile) {
 		this.gameOver = gameOver;
 		this.Melds = updatedMelds;
+		this.pile = updatedPile;
+		if(status = true)
+			this.status = true;
 		notifyObservers();
 	}
 	//GETTERS
@@ -56,5 +61,17 @@ private boolean gameOver = false;
 	public boolean getGameOver() {
 		return this.gameOver;
 	}
-
+	//SETTERS
+	public void setMelds(ArrayList<Meld> melds) {
+		this.Melds = melds;
+	}
+	public void setPile(Pile pile) {
+		this.pile = pile;
+	}
+	public List<Observer> getObservers() {
+		return observers;
+	}
+	public void setObservers(List<Observer> observers) {
+		this.observers = observers;
+	}
 }

@@ -7,6 +7,8 @@ public class SortHandTest extends TestCase{
 	
 	public void testSortHand() {
 		Player player = new Player();
+		AI bot = new AI(1);
+		bot.addTile(new Tile(1,1));
 		
 		player.addTile(new Tile(2,4));
 		player.addTile(new Tile(3,3));

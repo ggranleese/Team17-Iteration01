@@ -288,10 +288,50 @@ public class TestPlan extends TestCase{
 		bot3.pushToTable(table);
 	}
 
-	public static void R11() {}
-	public static void R12() {}
-	public static void R13() {}
-	public static void R14() {}
+	public static void R11() {
+		
+		//11a and 11b
+		//p3 is given three tiles:
+		//[R1 : B2 : G3]
+		//p3's turn goes by
+		//assertTrue checks to make sure that p3 did not play since it didn't have 30+ points.
+		testUnderThirty();
+		
+	}
+	public static void R12() {
+		
+		//12a
+		//p1 is given three tiles
+		//[B9 : G5 : O1]
+		//p1 doesn't make a play and draws a card giving them a total of 4 tiles
+		//p3 is given six tiles
+		//[R1 : R2 : R3 : B1 : B2 : B3]
+		//p3 plays all its tiles to win game
+		testWinGame();
+		
+	}
+	public static void R13() {
+		
+		//13a and 13b
+		//p1 is given three tiles
+		//[B9 : G5 : O1]
+		//p1 calls doTurn() and draws a random tile, giving them a total of 4 tiles
+		//p3 is given seven tiles
+		//[R9 : R10 : R11 : B9 : B10 : B11 : 01]
+		//p1 has three fewer tiles than p3
+		//p3 plays all its tiles to win game
+		testThreeFewer();
+		
+	}
+	
+	public static void R14() {
+		
+		//Since we are not implementing table functions
+		//this test function demonstrates the UI text ("p3 would reuse table")
+		//when no other player has 3 fewer
+		testUnderThirty();
+		
+	}
 
 	public static void R15() {}
 	public static void R16() {}
@@ -300,5 +340,91 @@ public class TestPlan extends TestCase{
 
 	public static void R19() {}
 	public static void R20() {}
+	
+	public static void testUnderThirty() {
+		Table table = new Table();
+		Player p1 = new Player();
+		AI bot = new AI(3);
+		
+		table.registerObserver(p1);
+		table.registerObserver(bot);
+		table.notifyObservers();
+		table.getPile().populate();
+		table.getPile().shuffle();
+		
+		int initial = table.getMelds().size();
+		
+		//bot should do nothing should do nothing since it doesn't have 30pts to play yet 
+		bot.addTile(new Tile(1,1));
+		bot.addTile(new Tile(2,2));
+		bot.addTile(new Tile(3,3));
+		
+		((AI)bot).doTurn();
+		bot.pushToTable(table);
+		
+		assertTrue(initial == table.getMelds().size());
+	}
+	
+	public static void testWinGame() {
+		Table table = new Table();
+		Player p1 = new Player();
+		AI bot = new AI(3);
+		
+		table.registerObserver(p1);
+		table.registerObserver(bot);
+		table.notifyObservers();
+		table.getPile().populate();
+		table.getPile().shuffle();
+		
+		p1.addTile(new Tile(2,9));
+		p1.addTile(new Tile(3,5));
+		p1.addTile(new Tile(4,1));
+		p1.pushToTable(table);
+		
+		bot.addTile(new Tile(1,1));
+		bot.addTile(new Tile(1,2));
+		bot.addTile(new Tile(1,3));
+		bot.addTile(new Tile(2,5));
+		bot.addTile(new Tile(2,6));
+		bot.addTile(new Tile(2,7));
+		
+		((AI)bot).doTurn();
+		((AI)bot).pushToTable(table);
+		
+		assertTrue(bot.getHand().size() == 0);
+		
+		
+	}
+	
+	public static void testThreeFewer(){
+		Table table = new Table();
+		Player p1 = new Player();
+		AI bot = new AI(3);
+		
+		table.registerObserver(p1);
+		table.registerObserver(bot);
+		table.notifyObservers();
+		table.getPile().populate();
+		table.getPile().shuffle();
+		
+		p1.addTile(new Tile(2,9));
+		p1.addTile(new Tile(3,5));
+		p1.addTile(new Tile(4,1));
+		p1.pushToTable(table);
+		
+		bot.addTile(new Tile(1,9));
+		bot.addTile(new Tile(1,10));
+		bot.addTile(new Tile(1,11));
+		bot.addTile(new Tile(2,9));
+		bot.addTile(new Tile(2,10));
+		bot.addTile(new Tile(2,11));
+		bot.addTile(new Tile(4,1));
+		
+		((AI)bot).doTurn();
+		((AI)bot).pushToTable(table);
+		
+		//bot should play all possible melds since p1 has 3 fewer tiles
+		assertTrue(bot.getHand().size() == 1);
+	}
 	
 }

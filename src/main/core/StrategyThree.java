@@ -55,7 +55,7 @@ public class StrategyThree implements IStrategy {
 				handHold.remove(t);
 			}
 		}
-		System.out.println(handHold);
+
 		ArrayList<Set> possibleSets = checkSet(handHold);
 	
 		for(Set r : possibleSets) {

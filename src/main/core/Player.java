@@ -3,6 +3,7 @@ package core;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player implements Observer{
@@ -279,19 +280,27 @@ public class Player implements Observer{
 		System.out.println("USER TURN");
 		System.out.println("1.Play tiles.");
 		System.out.println("2.Draw tile & end turn.");
-		int n = input.nextInt();
-		switch(n) {
-			case 1: 
-				playOptions();
-				break;
-			case 2:
-				endTurn();
-				break;
-			default:
-				System.out.println("Invalid choice.");
-				doTurn();
-				break;
+		
+		try {
+			int n = input.nextInt();
+			
+			switch(n) {
+				case 1: 
+					playOptions();
+					break;
+				case 2:
+					endTurn();
+					break;
+				default:
+					System.out.println("Invalid choice.");
+					doTurn();
+					break;
+			}
+		}catch(InputMismatchException e) {
+			System.out.println("INVALID");
+			
 		}
+		
 	}
 	private void playOptions() {
 		printTiles(hand);
@@ -439,20 +448,27 @@ public class Player implements Observer{
 			System.out.println("2.Use tile(s) form a meld");
 			System.out.println("3.Back");
 			
-			int n = input.nextInt();
-			switch(n) {
-			case 1:
-				addToMeld(fromHand());
-				break;
-			case 2:
-				fromMeld();
-			case 3:
+			try {
+				int n = input.nextInt();
+				switch(n) {
+				case 1:
+					addToMeld(fromHand());
+					break;
+				case 2:
+					fromMeld();
+				case 3:
+					doTurn();
+					break;
+				default:
+					System.out.println("Invalid choice");
+					break;
+				}
+			}catch(Exception e) {
+				System.out.println("Please enter a valid number");
 				doTurn();
-				break;
-			default:
-				System.out.println("Invalid choice");
-				break;
+				
 			}
+			
 		}
 	}
 	
@@ -573,7 +589,7 @@ public class Player implements Observer{
 			System.out.println("\n");
 			}
 		}
-	
+		
 		table.updateTable(this.tableSnapshot.getMelds(), this.gameOver, this.status, this.tableSnapshot.getPile());
 	}
 	

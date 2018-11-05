@@ -47,8 +47,10 @@ public boolean status;
 		this.gameOver = gameOver;
 		this.Melds = updatedMelds;
 		this.pile = updatedPile;
-		if(status = true)
+
+		if(status == true) {
 			this.status = true;
+		}
 		notifyObservers();
 	}
 	//GETTERS

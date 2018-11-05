@@ -121,7 +121,7 @@ public class StrategyOne implements IStrategy {
 				handHold.remove(t);
 			}
 		}
-		System.out.println(handHold);
+		
 		ArrayList<Set> possibleSets = checkSet(handHold);
 	
 		for(Set r : possibleSets) {

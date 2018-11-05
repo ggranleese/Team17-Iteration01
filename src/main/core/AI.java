@@ -74,45 +74,11 @@ private IStrategy strategy;
 			return runs;
 		
 	}
-	
-	public ArrayList<Set> checkSet(){
-		ArrayList<Set> sets = new ArrayList<Set>();
-		ArrayList<Tile> hold = new ArrayList<Tile>();
-
-		
-		for(int i=1; i<=4; i++){
-			for(int t=0; t<colourSplitter(i).size(); t++) {
-				
-				int counter = 1;
-				hold.add(colourSplitter(i).get(t));
-				
-				for(int j=1; j<=4; j++) {
-					if(j==i){
-						
-						for(Tile x: colourSplitter(j)) {
-							if(x.getValue() == colourSplitter(i).get(t).getValue()) {
-								counter++;
-								hold.add(x);
-								break;
-							}
-						}
-					}
-					if(counter <3){
-						hold.clear();
-					}else {
-						sets.add(new Set(hold));
-						hold.clear();
-						counter = 1;
-					}
-				}
-
-			}
-		}
-		
-		return sets;
-		
-		
-	}
+//	
+//	public ArrayList<Set> checkSet(){
+//		
+//		
+//	}
 	
 	public ArrayList<Tile> colourSplitter(int i) {
 		

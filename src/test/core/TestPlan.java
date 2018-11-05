@@ -187,8 +187,29 @@ public class TestPlan extends TestCase{
 			player.setGameOver(false);
 	}
 	
-	public static void R5() {}
-	public static void R6() {}
+	public static void R5() {
+		//A table and player are first created
+		//The table registers the player as an observer
+		//The player is then prompted to interact with the UI and perform the operation
+		Table table = new Table();
+		Player player = new Player();
+		
+		table.registerObserver(player);
+		
+		player.doTurn();
+		
+	}
+	public static void R6() {
+		//A table and player are first created
+		//The table registers the player as an observer
+		//The player is then prompted to interact with the UI and perform the operation
+		Table table = new Table();
+		Player player = new Player();
+		
+		table.registerObserver(player);
+		
+		player.doTurn();
+	}
 	public static void R7() {
 		System.out.println("Requirement 7");
 		Table table = new Table();
@@ -207,7 +228,6 @@ public class TestPlan extends TestCase{
 		
 	}
 	public static void R8() {
-<<<<<<< HEAD
 		
 		//Player1 is given Run:
 		//[R10, R11, R12]
@@ -240,9 +260,9 @@ public class TestPlan extends TestCase{
 		
 		
 		
-=======
+
 		System.out.println("Requirement 8");
->>>>>>> a0309910e18f1e3151603a6b5e98b65f81380f05
+
 		Table table = new Table();
 		Player player1 = new Player();
 		Player player2 = new Player();
@@ -338,6 +358,65 @@ public class TestPlan extends TestCase{
 
 	}
 	public static void R9() {
+		//User starts turn with hand:
+		//{[R1]}
+		//User plays run:
+		//{[R10] [R11] [R12]}
+		
+		// User draws [R13]
+		//User can add [R13] to make:
+		//{[R10] [R11] [R12] [R13]}
+		//Users hand is now:
+		//{[R1]}
+		
+		//User plays set:
+		//{[R10] [B10] [G10]}
+		
+		// User draws [O10]
+		//User can add [010] to make:
+		//{[R10] [B10] [G10] [O10]}
+		//Users hand is now:
+		//{[R1]}
+		
+		//User draws: [R8] [R9]
+		//User can add to:
+		//{[R10] [R11] [R12] [R13]}
+		//to make: 
+		//{[R8] [R9] [R10] [R11] [R12] [R13]}
+		//Users hand is now: [R1]
+		
+		//User draws: [R7] [R6]
+		//User can take R8 from:
+		//{[R8] [R9] [R10] [R11] [R12] [R13]}
+		//to make: 
+		//[R6] [R7] [R8]
+		//Users hand is now: [R1]
+		
+		//User draws: [G10] [B10]
+		//User can take R10 from:
+		//{[R10] [B10] [G10] [O10]}
+		//to make: 
+		//{[R10] [B10] [G10]}
+		//Users hand is now: [R1]
+		
+		//User draws: [R8] [R10]
+		//User can add R8 to:
+		//{[R9] [R10] [R11] [R12] [R13]}
+		//to make: 
+		//{[R8] [R9] [R10] [R11] [R12] [R13]}
+		//User can add R10 to:
+		//{[B10] [G10] [O10]}
+		//To make: {[R10] [B10] [G10] [O10]}
+		//Users hand is now: [R1]
+		
+		//User draws R9
+		//User can take R10 from
+		//{[R10] [B10] [G10] [O10]}
+		//User can take R8 from
+		//{[R8] [R9] [R10] [R11] [R12] [R13]}
+		//User can make run
+		//{[R8] [R9] [R10]}
+		
 		System.out.println("Requirement 9");
 		Table table = new Table();
 		
@@ -349,17 +428,56 @@ public class TestPlan extends TestCase{
 		table.getPile().populate();
 		table.getPile().shuffle();
 		
-		player.playMeld(new Run(new ArrayList<Tile>() {{
-			add(new Tile(1,10));
-			add(new Tile(2,11));
-			add(new Tile(3,12));
-			}}));
+		player.addTile(new Tile(1,1));
 		
 		player.playMeld(new Run(new ArrayList<Tile>() {{
 			add(new Tile(1,10));
-			add(new Tile(2,11));
-			add(new Tile(3,12));
+			add(new Tile(1,11));
+			add(new Tile(1,12));
 			}}));
+		player.addTile(new Tile(1,13));
+		//9a
+		player.doTurn();
+		player.pushToTable(table);
+		
+		player.playMeld(new Set(new ArrayList<Tile>() {{
+			add(new Tile(1,10));
+			add(new Tile(2,10));
+			add(new Tile(3,10));
+			}}));
+		player.addTile(new Tile(4,10));
+		//9b
+		player.doTurn();
+		player.pushToTable(table);
+		
+		//9c
+		player.addTile(new Tile(1,8));
+		player.addTile(new Tile(1,9));
+		player.doTurn();
+		player.pushToTable(table);
+		
+		//9d
+		player.addTile(new Tile(1,7));
+		player.addTile(new Tile(1,6));
+		player.doTurn();
+		player.pushToTable(table);
+		
+		//9e
+		player.addTile(new Tile(3,10));
+		player.addTile(new Tile(2,10));
+		player.doTurn();
+		player.pushToTable(table);
+		
+		//9f
+		player.addTile(new Tile(1,8));
+		player.addTile(new Tile(1,10));
+		player.doTurn();
+		player.pushToTable(table);
+		
+		//9g
+		player.addTile(new Tile(1,9));
+		player.doTurn();
+		player.pushToTable(table);
 		
 	}
 	
@@ -483,11 +601,6 @@ public class TestPlan extends TestCase{
 		testUnderThirty();
 		
 	}
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 3c246e84f8530e416ebd526de7468f7f92e5fbd4
 
 	public static void R15() {
 		System.out.println("Requirement 15");

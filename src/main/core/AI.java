@@ -25,23 +25,11 @@ private int stratNum;
 		for(int i = 0; i<14; i++) {
 			drawTile(this.tableSnapshot.getPile());
 		}
-<<<<<<< HEAD
-			
-			return runs;
-		
-	}
-//	
-//	public ArrayList<Set> checkSet(){
-//		
-//		
-//	}
-=======
 		sortHand();
 		System.out.println("Bot " + stratNum + " Hand:");
 		printTiles(this.hand);
 		System.out.println("\n");
 	}
->>>>>>> 473e880b8f906725c12ab876cae1a1af7911bdc4
 	
 	public void doTurn() {
 		System.out.println("BOT " + this.stratNum+ " TURN");

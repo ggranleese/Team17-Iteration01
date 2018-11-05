@@ -7,78 +7,42 @@ import junit.framework.TestCase;
 
 public class TestPlan extends TestCase{
 	public static void main(String[] args) {
-		System.out.println("Select Requirement: ");
+		
 		Scanner choice = new Scanner(System.in);
 		int userSelection = -1;
+		while(true) {
+		System.out.println("Select Requirement: ");
 		if(choice.hasNextInt()) {
 			userSelection = choice.nextInt();
 			}
 		switch(userSelection) {
-			case 1: R1();
-			case 2: R2();
-			case 3: R3();
-			case 4: R4();
-			case 5: R5();
-			case 6: R6();
-			case 7: R7();
-			case 8: R8();
-			case 9: R9();
-			case 11: R10();
-			case 10: R11();
-			case 12: R12();
-			case 13: R13();
-			case 14: R14();
-			case 15: R15();
-			case 16: R16();
-			case 17: R17();
-			case 18: R18();
-			case 19: R19();
-			case 20: R20();
+			case 1: R1(); break;
+			case 2: R2(); break;
+			case 3: R3(); break;
+			case 4: R4(); break;
+			case 5: R5(); break;
+			case 6: R6(); break;
+			case 7: R7(); break;
+			case 8: R8(); break;
+			case 9: R9(); break;
+			case 11: R10(); break;
+			case 10: R11(); break;
+			case 12: R12(); break;
+			case 13: R13(); break;
+			case 14: R14(); break;
+			case 15: R15(); break;
+			case 16: R16(); break;
+			case 17: R17(); break;
+			case 18: R18(); break;
+			case 19: R19(); break;
+			case 20: R20(); break;
 		}
-		choice.close();
+		}
 	}
 
-	public static void test() {
-		Table table = new Table();
-		Player player = new Player();
-		AI bot1 = new AI(1);
-		AI bot2 = new AI(2);
-		AI bot3 = new AI(3);
-		
-		table.registerObserver(player);
-		table.registerObserver(bot1);
-		table.registerObserver(bot2);
-		table.registerObserver(bot3);
-		table.notifyObservers();
-		table.getPile().populate();
-		table.getPile().shuffle();
-
-		player.drawHand();
-		
-		bot1.drawHand();
-		
-		bot2.drawHand();
 	
-		bot3.drawHand();
-			
-			
-			//6
-			player.drawHand();
-			int sizeBefore = player.getHand().size();
-			player.pushToTable(table);
-			int sizeAfter = player.getHand().size();
-			assertTrue(sizeBefore + 1 == sizeAfter);
-			
-			//7
-			bot1.addTile(new Tile(1,10));
-			bot1.addTile(new Tile(1,11));
-			bot1.addTile(new Tile(1,12));
-			bot1.doTurn();
-			
-			//8
-			
-	}
 	public static void R1() {
+		System.out.println("Requirement 1");
 		Table table = new Table();
 		Player player = new Player();
 		AI bot1 = new AI(1);
@@ -103,6 +67,7 @@ public class TestPlan extends TestCase{
 		
 	}
 	public static void R2() {
+		System.out.println("Requirement 2");
 		Table table = new Table();
 		Player player = new Player();
 		AI bot1 = new AI(1);
@@ -131,7 +96,7 @@ public class TestPlan extends TestCase{
 	}
 	public static void R3() {}
 	public static void R4() {
-		
+		System.out.println("Requirement 4");
 		Table table = new Table();
 		Player player = new Player();
 		AI bot1 = new AI(1);
@@ -214,6 +179,7 @@ public class TestPlan extends TestCase{
 	public static void R5() {}
 	public static void R6() {}
 	public static void R7() {
+		System.out.println("Requirement 7");
 		Table table = new Table();
 		Player player = new Player();
 		
@@ -230,6 +196,7 @@ public class TestPlan extends TestCase{
 		
 	}
 	public static void R8() {
+		System.out.println("Requirement 8");
 		Table table = new Table();
 		Player player1 = new Player();
 		Player player2 = new Player();
@@ -324,6 +291,7 @@ public class TestPlan extends TestCase{
 
 	}
 	public static void R9() {
+		System.out.println("Requirement 9");
 		Table table = new Table();
 		
 		Player player = new Player();
@@ -349,6 +317,7 @@ public class TestPlan extends TestCase{
 	}
 	
 	public static void R10() {
+		System.out.println("Requirement 10");
 		Table table = new Table();
 		
 		AI bot1 = new AI(1);
@@ -429,6 +398,18 @@ public class TestPlan extends TestCase{
 	public static void R14() {}
 
 	public static void R15() {
+		System.out.println("Requirement 15");
+		//Player starts game with this hand:
+		//{[R10] [B10] [G10] [R10]}
+		//Player plays a set with these tiles
+		//A player has now played 30 points
+		//Bot does its turn with this hand:
+		//{[R10]}
+		//Bot is unable to make a meld with these tiles so it draws a tile
+		//Bot does its turn with this hand:
+		//{[R10] [R11] [R12]}
+		//Bot is able to play a meld and does so
+		
 		Table table = new Table();
 		Player p1 = new Player();
 		AI bot = new AI(2);
@@ -438,7 +419,7 @@ public class TestPlan extends TestCase{
 		table.notifyObservers();
 		table.getPile().populate();
 		table.getPile().shuffle();
-		
+	
 		ArrayList<Tile> tiles = new ArrayList<Tile>();
 		tiles.add(new Tile(1,10));
 		tiles.add(new Tile(2,10));
@@ -466,9 +447,51 @@ public class TestPlan extends TestCase{
 		((AI)bot).doTurn();
 		((AI)bot).pushToTable(table);
 		
-		assertTrue(initial == table.getMelds().size());
+		assertTrue(initial +1 == table.getMelds().size());
 	}
-	public static void R16() {}
+	
+	public static void R16() {
+		System.out.println("Requirement 16");
+		//User starts game with this hand:
+		//{[R10] [B10] [G10] [R10]}
+		//User plays a set with these tiles
+		//A player has now played 30 points
+		//Bot does its turn with this hand:
+		//{[R5] [R6] [R7]}
+		//Bot is able to win so plays a run with these tiles even though the value != 30
+		
+		Table table = new Table();
+		Player player = new Player();
+		AI bot = new AI(2);
+		
+		table.registerObserver(bot);
+		table.notifyObservers();
+		table.getPile().populate();
+		table.getPile().shuffle();
+		
+		ArrayList<Tile> tiles = new ArrayList<Tile>();
+		tiles.add(new Tile(1,10));
+		tiles.add(new Tile(2,10));
+		tiles.add(new Tile(3,10));
+		
+		Set run = new Set(tiles);
+		
+		player.addTile(new Tile(1,1));
+		player.playMeld(run);
+		player.pushToTable(table);
+		
+		//15a
+		bot.addTile(new Tile(1,5));
+		bot.addTile(new Tile(1,6));
+		bot.addTile(new Tile(1,7));
+		
+		//16a
+		((AI)bot).doTurn();
+		((AI)bot).pushToTable(table);
+		
+		assertTrue(table.getGameOver());
+		
+	}
 	public static void R17() {}
 	public static void R18() {}
 

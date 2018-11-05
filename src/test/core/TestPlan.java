@@ -94,7 +94,18 @@ public class TestPlan extends TestCase{
 		bot3.doTurn();
 		
 	}
-	public static void R3() {}
+	public static void R3() {
+		//A table and player are first created
+		//The table registers the player as an observer
+		//The player is then prompted to interact with the UI and perform the operation
+		Table table = new Table();
+		Player player = new Player();
+		
+		table.registerObserver(player);
+		
+		player.doTurn();
+		
+	}
 	public static void R4() {
 		System.out.println("Requirement 4");
 		Table table = new Table();
@@ -391,7 +402,7 @@ public class TestPlan extends TestCase{
 		bot3.pushToTable(table);
 	}
 
-<<<<<<< HEAD
+
 	public static void R11() {
 		
 		//11a and 11b
@@ -436,13 +447,8 @@ public class TestPlan extends TestCase{
 		testUnderThirty();
 		
 	}
-=======
-	public static void R11() {}
-	
-	public static void R12() {}
-	public static void R13() {}
-	public static void R14() {}
->>>>>>> 980b2626d04f0bbc20e2c29d78f3d9cee557756c
+
+
 
 	public static void R15() {
 		System.out.println("Requirement 15");

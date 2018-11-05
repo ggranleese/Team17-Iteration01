@@ -230,6 +230,38 @@ public class TestPlan extends TestCase{
 		
 	}
 	public static void R8() {
+		
+		//Player1 is given Run:
+		//[R10, R11, R12]
+		//Player1 plays the meld, increasing the table size by 1
+		//Player1 then pushes to the table
+		
+		
+		//Player2 is given a Set:
+		//[R10, B10, G10]
+		//Player2 plays the meld, increasing the table size by 1
+		//Player2 then pushes to the table
+		
+		//Player3 is given 2 Runs:
+		//[R10, R11, R12]
+		//[B10, B11, B12]
+		//Player3 plays the two melds, increasing the table size by 2
+		//Player3 then pushes to the table
+		
+		//Player4 is given 2 Sets:
+		//[R10, B10, G10]
+		//[B10, G10, O10]
+		//Player4 plays the two melds, increasing the table size by 2
+		//Player4 then pushes to the table
+		
+		//Player5 is given a Run and a Set
+		//Run: [R10, B10, G10]
+		//Set: [B10, B11, B12]
+		//Player5 plays the two melds, increasing the table size by 2
+		//Player5 then pushes to the table
+		
+		
+		
 		Table table = new Table();
 		Player player1 = new Player();
 		Player player2 = new Player();
@@ -248,7 +280,7 @@ public class TestPlan extends TestCase{
 		table.getPile().populate();
 		table.getPile().shuffle();
 		
-		//Run
+		//8a
 		player1.playMeld(new Run(new ArrayList<Tile>() {{
 			add(new Tile(1,10));
 			add(new Tile(1,11));
@@ -259,7 +291,7 @@ public class TestPlan extends TestCase{
 		
 		assertTrue(table.getMelds().size() == tableSize + 1);
 		
-		//Set
+		//8b
 		tableSize = table.getMelds().size();
 		player2.playMeld(new Set(new ArrayList<Tile>() {{
 			add(new Tile(1,10));
@@ -269,8 +301,9 @@ public class TestPlan extends TestCase{
 		
 		player2.pushToTable(table);
 		assertTrue(table.getMelds().size() == tableSize +1);
-		
-		//Several Runs
+
+
+		//8c
 		tableSize = table.getMelds().size();
 		player3.playMeld(new Run(new ArrayList<Tile>() {{
 			add(new Tile(1,10));
@@ -287,7 +320,7 @@ public class TestPlan extends TestCase{
 		player3.pushToTable(table);
 		assertTrue(table.getMelds().size() == tableSize +2);
 		
-		//Several Sets
+		//8d
 		tableSize = table.getMelds().size();
 		player4.playMeld(new Set(new ArrayList<Tile>() {{
 			add(new Tile(1,10));
@@ -304,7 +337,7 @@ public class TestPlan extends TestCase{
 		player4.pushToTable(table);
 		assertTrue(table.getMelds().size() == tableSize +2);
 		
-		//A mix of Runs & Sets
+		//8e
 		tableSize = table.getMelds().size();
 		player5.playMeld(new Set(new ArrayList<Tile>() {{
 			add(new Tile(1,10));
@@ -422,7 +455,7 @@ public class TestPlan extends TestCase{
 		bot3.pushToTable(table);
 	}
 
-<<<<<<< HEAD
+
 	public static void R11() {
 		
 		//11a and 11b
@@ -467,13 +500,7 @@ public class TestPlan extends TestCase{
 		testUnderThirty();
 		
 	}
-=======
-	public static void R11() {}
-	
-	public static void R12() {}
-	public static void R13() {}
-	public static void R14() {}
->>>>>>> 980b2626d04f0bbc20e2c29d78f3d9cee557756c
+
 
 	public static void R15() {
 		Table table = new Table();

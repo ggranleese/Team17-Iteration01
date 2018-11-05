@@ -17,9 +17,21 @@ public class StrategyThree implements IStrategy {
 		if(counter - hand.size() == 0) {
 			return plays;	
 		}
-		if(threeFewerExists(hand, table)) {
+		
+		if(threeFewerExists(hand, table) && plays.size() != 0) {
 			return plays;
 		} 
+		
+		if(threeFewerExists(hand, table) && plays.size() == 0){
+			System.out.println("p3 could play but has not tile to play");
+			return plays;
+		}
+		
+		if(!threeFewerExists(hand,table)) {
+			System.out.println("p3 would reuse table");
+			
+		}
+		
 		if(checkTotalPoints(plays) > 30) {
 			return plays;
 		}else {

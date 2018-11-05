@@ -14,7 +14,26 @@ public class TestPlan extends TestCase{
 			userSelection = choice.nextInt();
 			}
 		switch(userSelection) {
-			case 10: R10();
+			case 1: R1();
+			case 2: R2();
+			case 3: R3();
+			case 4: R4();
+			case 5: R5();
+			case 6: R6();
+			case 7: R7();
+			case 8: R8();
+			case 9: R9();
+			case 11: R10();
+			case 10: R11();
+			case 12: R12();
+			case 13: R13();
+			case 14: R14();
+			case 15: R15();
+			case 16: R16();
+			case 17: R17();
+			case 18: R18();
+			case 19: R19();
+			case 20: R20();
 		}
 		choice.close();
 	}
@@ -42,62 +61,6 @@ public class TestPlan extends TestCase{
 	
 		bot3.drawHand();
 			
-			//4a1
-			assertTrue(!player.getStatus());
-			player.playMeld(new Set(new ArrayList<Tile>() {{
-				add(new Tile(1,10));
-				add(new Tile(2,10));
-				add(new Tile(3,10));
-				}}));
-			assertTrue(player.getStatus());
-			
-			//4a2
-			player.setStatus(false);
-			assertTrue(!player.getStatus());
-			player.playMeld(new Set(new ArrayList<Tile>() {{
-				add(new Tile(1,11));
-				add(new Tile(2,11));
-				add(new Tile(3,11));
-				}}));
-			assertTrue(player.getStatus());
-			
-			//4b1
-			player.setStatus(false);
-			assertTrue(!player.getStatus());
-			player.playMeld(new Set(new ArrayList<Tile>() {{
-				add(new Tile(1,5));
-				add(new Tile(2,5));
-				add(new Tile(3,5));
-				}}));
-			player.playMeld(new Set(new ArrayList<Tile>() {{
-				add(new Tile(1,5));
-				add(new Tile(2,5));
-				add(new Tile(3,5));
-				}}));
-			assertTrue(player.getStatus());
-
-			//4b2
-			player.setStatus(false);
-			assertTrue(!player.getStatus());
-			player.playMeld(new Set(new ArrayList<Tile>() {{
-				add(new Tile(1,10));
-				add(new Tile(2,10));
-				add(new Tile(3,10));
-				}}));
-			player.playMeld(new Set(new ArrayList<Tile>() {{
-				add(new Tile(1,10));
-				add(new Tile(2,10));
-				add(new Tile(3,10));
-				}}));
-			assertTrue(player.getStatus());
-			
-			//4c
-			//5
-			player.doTurn();
-			player.hand.clear();
-			player.pushToTable(table);
-			assertTrue(table.getGameOver());
-			player.setGameOver(false);
 			
 			//6
 			player.drawHand();
@@ -116,11 +79,33 @@ public class TestPlan extends TestCase{
 			
 	}
 	public static void R1() {
+		Table table = new Table();
+		Player player = new Player();
+		AI bot1 = new AI(1);
+		AI bot2 = new AI(2);
+		AI bot3 = new AI(3);
+		
+		table.registerObserver(player);
+		table.registerObserver(bot1);
+		table.registerObserver(bot2);
+		table.registerObserver(bot3);
+		table.notifyObservers();
+		table.getPile().populate();
+		table.getPile().shuffle();
+
+		player.drawHand();
+		
+		bot1.drawHand();
+		
+		bot2.drawHand();
+	
+		bot3.drawHand();
 		
 	}
 	public static void R2() {}
 	public static void R3() {}
 	public static void R4() {
+		
 		Table table = new Table();
 		Player player = new Player();
 		AI bot1 = new AI(1);
@@ -302,4 +287,18 @@ public class TestPlan extends TestCase{
 		bot3.doTurn();
 		bot3.pushToTable(table);
 	}
+
+	public static void R11() {}
+	public static void R12() {}
+	public static void R13() {}
+	public static void R14() {}
+
+	public static void R15() {}
+	public static void R16() {}
+	public static void R17() {}
+	public static void R18() {}
+
+	public static void R19() {}
+	public static void R20() {}
+	
 }
